@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MongoDB Fundamentals - Library Management System</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation Header -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <i class="fa-solid fa-database brand-icon"></i>
+        <div>
+          <h1>MongoDB Library System</h1>
+          <span class="subtitle">EDquest MongoDB Fundamentals Assignment</span>
+        </div>
+      </div>
+      <nav class="nav-tabs">
+        <button class="tab-btn active" data-tab="catalog-tab">
+          <i class="fa-solid fa-book"></i> Book Catalog
+        </button>
+
+        <button class="tab-btn" data-tab="authors-tab">
+          <i class="fa-solid fa-feather-pointed"></i> Authors
+        </button>
+
+        <button class="tab-btn" data-tab="analytics-tab">
+          <i class="fa-solid fa-chart-pie"></i> Aggregation Stats
+        </button>
+
+        <button class="tab-btn" data-tab="report-tab">
+          <i class="fa-solid fa-file-contract"></i> Research Report
+        </button>
+      </nav>
+      <button class="btn btn-primary" id="open-add-book-modal">
+        <i class="fa-solid fa-plus"></i> Add New Book
+      </button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- ================= CATALOG TAB ================= -->
+    <section id="catalog-tab" class="tab-content active">
+      <div class="filter-panel">
+        <h2><i class="fa-solid fa-filter"></i> Database Search & Filters</h2>
+        <div class="filter-grid">
+          <div class="filter-group search-box">
+            <label><i class="fa-solid fa-magnifying-glass"></i> Full-Text / Keyword Search</label>
+            <input type="text" id="search-input" placeholder="Search by title, tag, or summary...">
+          </div>
+          
+          <div class="filter-group">
+            <label><i class="fa-solid fa-tags"></i> Genre</label>
+            <select id="genre-filter">
+              <option value="">All Genres</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label><i class="fa-solid fa-user"></i> Author</label>
+            <select id="author-filter">
+              <option value="">All Authors</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <label><i class="fa-solid fa-calendar"></i> Published Year</label>
+            <div class="range-inputs">
+              <input type="number" id="min-year" placeholder="Min Year">
+              <span>to</span>
+              <input type="number" id="max-year" placeholder="Max Year">
+            </div>
+          </div>
+
+          <div class="filter-group checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="available-filter">
+              Only Available Copies
+            </label>
+          </div>
+
+          <div class="filter-group actions">
+            <button class="btn btn-secondary" id="reset-filters-btn">
+              <i class="fa-solid fa-rotate-left"></i> Reset Filters
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-header">
+        <h3>Books Collection <span id="books-count-badge" class="badge">0</span></h3>
+      </div>
+
+      <div id="books-grid" class="books-grid">
+        <!-- Dynamic Book Cards rendered here -->
+      </div>
+    </section>
+
+    <!-- ================= AUTHORS TAB ================= -->
+    <section id="authors-tab" class="tab-content">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-users"></i> Authors Directory</h2>
+        <button class="btn btn-secondary" id="open-add-author-modal">
+          <i class="fa-solid fa-plus"></i> Add New Author
+        </button>
+      </div>
+
+      <div id="authors-grid" class="authors-grid">
+        <!-- Dynamic Author Cards -->
+      </div>
+    </section>
+
+    <!-- ================= ANALYTICS TAB ================= -->
+    <section id="analytics-tab" class="tab-content">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-chart-line"></i> MongoDB Aggregation Pipelines</h2>
+        <p>Real-time database metrics generated using MongoDB <code>$lookup</code>, <code>$group</code>, <code>$unwind</code>, and <code>$project</code> operators.</p>
+      </div>
+
+      <div class="analytics-grid">
+        <div class="analytics-card">
+          <h3><i class="fa-solid fa-layer-group"></i> Books per Genre Breakdown</h3>
+          <div id="genre-analytics-list" class="stats-list">
+            <!-- Dynamic stats -->
+          </div>
+        </div>
+
+        <div class="analytics-card">
+          <h3><i class="fa-solid fa-trophy"></i> Top Authors by Library Titles</h3>
+          <div id="author-analytics-list" class="stats-list">
+            <!-- Dynamic stats -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= REPORT TAB ================= -->
+    <section id="report-tab" class="tab-content">
+      <div class="report-container">
+        <div class="report-header">
+          <h2>MongoDB & NoSQL Architectural Report</h2>
+          <p>Author: Animesh Devarkar | Assignment: MongoDB Fundamentals</p>
+        </div>
+        <article class="report-body">
+          <h3>1. Executive Summary & NoSQL Philosophy</h3>
+          <p>Modern web applications require flexible, scalable, and high-throughput database systems. MongoDB provides a document-oriented NoSQL model storing data as JSON-like BSON documents. Unlike traditional RDBMS tables with fixed schemas, MongoDB empowers rapid application development through dynamic schemas and horizontal scaling.</p>
+          
+          <h3>2. Key Architectural Features</h3>
+          <ul>
+            <li><strong>BSON Document Storage:</strong> Native support for nested arrays, embedded documents, and rich data types.</li>
+            <li><strong>Dynamic Indexing:</strong> Compound indexes, full-text indexes, and geospatial indexes for ultra-fast query execution.</li>
+            <li><strong>Aggregation Pipeline:</strong> Powerful data transformation engine executing analytical pipelines server-side.</li>
+            <li><strong>High Availability & Sharding:</strong> Built-in Replica Sets for automatic failover and Sharding for horizontal horizontal scaling.</li>
+          </ul>
+
+          <h3>3. Library System Schema Design</h3>
+          <p>This implementation models a library database using both <strong>Referencing</strong> (normalizing Authors and Genres via <code>ObjectId</code> references in Books) and <strong>Embedding</strong> (embedded arrays for tags and awards). This hybrid approach provides consistent author/genre management while keeping query payloads optimal.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= ADD / EDIT BOOK MODAL ================= -->
+  <div id="book-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Add New Book</h3>
+        <button class="close-btn" id="close-modal-btn">&times;</button>
+      </div>
+      <form id="book-form">
+        <input type="hidden" id="book-id">
+        <div class="form-group">
+          <label>Title *</label>
+          <input type="text" id="book-title" required placeholder="e.g. Dune">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>ISBN *</label>
+            <input type="text" id="book-isbn" required placeholder="978-0441172719">
+          </div>
+          <div class="form-group">
+            <label>Published Year *</label>
+            <input type="number" id="book-year" required placeholder="1965">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Author *</label>
+            <select id="book-author" required></select>
+          </div>
+          <div class="form-group">
+            <label>Genre *</label>
+            <select id="book-genre" required></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Pages</label>
+            <input type="number" id="book-pages" placeholder="412">
+          </div>
+          <div class="form-group">
+            <label>Available Copies</label>
+            <input type="number" id="book-available" value="1">
+          </div>
+          <div class="form-group">
+            <label>Total Copies</label>
+            <input type="number" id="book-total" value="1">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Tags (comma separated)</label>
+          <input type="text" id="book-tags" placeholder="sci-fi, space, desert">
+        </div>
+        <div class="form-group">
+          <label>Summary</label>
+          <textarea id="book-summary" rows="3" placeholder="Brief summary of the book..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancel-modal-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>MongoDB Fundamentals Assignment &copy; 2026 Animesh Devarkar. EDquest Platform.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

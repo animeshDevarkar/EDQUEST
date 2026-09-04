@@ -1,0 +1,33 @@
+{
+  "name": "mongodb-fundamentals-assignment",
+  "version": "1.0.0",
+  "description": "MongoDB Fundamentals Assignment - Library Management System with CRUD operations, queries, aggregations, and research report.",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "seed": "node src/scripts/seed.js",
+    "shell-demo": "node src/scripts/mongoShellQueries.js",
+    "test": "node test/library.test.js"
+  },
+  "keywords": [
+    "mongodb",
+    "nosql",
+    "mongoose",
+    "crud",
+    "aggregation",
+    "library-system"
+  ],
+  "author": "Animesh Devarkar",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.1"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^9.2.0"
+  }
+}

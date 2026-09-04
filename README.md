@@ -12,6 +12,7 @@ Welcome to the central repository for **EDquest** development assignments and pr
 | **2** | [Version Control, Testing & Deployment Assignment](./Version%20Control%2C%20Testing%20%26%20Deployment%20Assignment/) | Git, Jest/Mocha, CI/CD Workflows, Node.js | Completed | [Project Folder](./Version%20Control%2C%20Testing%20%26%20Deployment%20Assignment/) |
 | **3** | [Mongoose Assignment](./mongoose-assignment/) | Node.js, MongoDB, Mongoose ODM | Completed | [Project Folder](./mongoose-assignment/) |
 | **4** | [Interactive UI Development with React](./Interactive%20UI%20Development%20with%20React/) | React, Vite, Vitest, Lucide Icons, Modern CSS | Completed | [README](./Interactive%20UI%20Development%20with%20React/README.md) |
+| **5** | [MongoDB Fundamentals Assignment](./MongoDB%20Fundamentals%20Assignment/) | Node.js, MongoDB, Mongoose, Express, BSON, Aggregations | Completed | [README](./MongoDB%20Fundamentals%20Assignment/README.md) \| [Research Report](./MongoDB%20Fundamentals%20Assignment/REPORT.md) |
 
 ---
 
@@ -21,6 +22,12 @@ Each subfolder is an independent, self-contained project with its own `package.j
 
 ```
 EDQUEST/
+├── MongoDB Fundamentals Assignment/
+│   ├── src/                 # Connection manager, Mongoose models, controllers & CLI scripts
+│   ├── public/              # Interactive Library Dashboard web UI
+│   ├── test/                # Automated MongoDB unit test suite
+│   ├── README.md            # Setup guide & API endpoint catalog
+│   └── REPORT.md            # NoSQL architecture & reflection report
 ├── Interactive UI Development with React/
 │   ├── src/                 # React components, styles & test suite
 │   ├── package.json         # React & Vitest dependencies
