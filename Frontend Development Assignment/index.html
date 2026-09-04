@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animesh Devarkar — Frontend Developer Portfolio</title>
+  <meta name="description" content="Responsive Frontend Developer portfolio showcasing HTML, CSS (Flexbox & Grid), JavaScript ES6+, interactive projects, and modern UI design.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-accent">&lt;</span>Animesh<span class="logo-accent">/&gt;</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <button id="menu-toggle" class="btn-icon mobile-only" aria-label="Toggle navigation menu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="hero">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="status-badge">
+          <span class="pulse-dot"></span>
+          Available for Frontend &amp; Full-Stack Projects
+        </div>
+        <h1 class="hero-title">
+          Crafting Modern, <span class="highlight">Responsive</span> &amp; Interactive Web Experiences
+        </h1>
+        <p class="hero-subtitle">
+          Hi! I'm <strong>Animesh Devarkar</strong>, a passion-driven Frontend Engineer specializing in HTML5, CSS3 Flexbox/Grid layouts, and JavaScript (ES6+). I build clean, high-performance web applications.
+        </p>
+        
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            Explore Projects
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        </div>
+
+        <div class="tech-stack-strip">
+          <span class="strip-label">Core Tech:</span>
+          <div class="badge-group">
+            <span class="tech-badge">HTML5</span>
+            <span class="tech-badge">CSS3 / Flexbox / Grid</span>
+            <span class="tech-badge">JavaScript ES6+</span>
+            <span class="tech-badge">React.js</span>
+            <span class="tech-badge">Git &amp; GitHub</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="code-window">
+          <div class="code-header">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="code-title">developer.js — Portfolio</span>
+          </div>
+          <pre class="code-body"><code><span class="keyword">const</span> developer = {
+  <span class="property">name</span>: <span class="string">'Animesh Devarkar'</span>,
+  <span class="property">role</span>: <span class="string">'Frontend Engineer'</span>,
+  <span class="property">skills</span>: [<span class="string">'HTML5'</span>, <span class="string">'CSS Grid'</span>, <span class="string">'Flexbox'</span>, <span class="string">'JS ES6+'</span>],
+  <span class="property">responsive</span>: <span class="boolean">true</span>,
+  <span class="property">status</span>: <span class="string">'Building robust web solutions'</span>,
+  <span class="function">codeCleanly</span>: () => {
+    <span class="keyword">return</span> <span class="string">'Semantic, Accessible &amp; Fast'</span>;
+  }
+};
+console.<span class="function">log</span>(developer.<span class="function">codeCleanly</span>());</code></pre>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- About Section -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">About Me</h2>
+          <p class="section-subtitle">Bridging design concepts with clean, efficient code</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <h3>Frontend Developer with a passion for intuitive UX</h3>
+            <p>
+              I am dedicated to crafting user-centered web applications. My development philosophy focuses on writing clean, maintainable code with modern semantic HTML structure, responsive CSS design systems, and robust JavaScript state management.
+            </p>
+            <p>
+              Whether structuring fluid CSS Grid layouts, optimizing cross-browser performance, or building interactive web UI components, I strive for high visual fidelity and top performance.
+            </p>
+            
+            <div class="about-features">
+              <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <div>
+                  <h4>Responsive &amp; Mobile-First</h4>
+                  <p>Flexible layouts engineered with CSS Flexbox &amp; Grid for seamless mobile, tablet, and desktop experiences.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">🎨</div>
+                <div>
+                  <h4>Design System Driven</h4>
+                  <p>Structured modular styles with CSS custom properties, consistent design tokens, and accessibility standards.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">🛠️</div>
+                <div>
+                  <h4>Interactive JavaScript</h4>
+                  <p>Dynamic client-side functionality, API integration, DOM manipulation, and asynchronous event handling.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-card">
+            <div class="profile-card">
+              <div class="profile-avatar">AD</div>
+              <h3>Animesh Devarkar</h3>
+              <p class="profile-title">Frontend Developer</p>
+              <hr class="profile-divider">
+              <ul class="profile-info">
+                <li><span>Location:</span> Maharashtra, India</li>
+                <li><span>Focus:</span> Web &amp; Interactive UI</li>
+                <li><span>Repository:</span> EDQUEST Monorepo</li>
+                <li><span>Availability:</span> Open to Opportunities</li>
+              </ul>
+              <a href="#contact" class="btn btn-outline full-width">Send Message</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section bg-alt" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Technical Expertise</h2>
+          <p class="section-subtitle">Core competencies across frontend &amp; full-stack web technologies</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3><span class="cat-icon">🌐</span> HTML5 &amp; Architecture</h3>
+            <p class="cat-desc">Semantic document markup, accessibility standards, DOM tree optimization, and form validation.</p>
+            <div class="skill-bar-container">
+              <div class="skill-info">
+                <span>Semantic HTML5 Markup</span>
+                <span>95%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" data-width="95%"></div></div>
+            </div>
+            <div class="skill-bar-container">
+              <div class="skill-info">
+                <span>Accessibility &amp; SEO Best Practices</span>
+                <span>90%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" data-width="90%"></div></div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3><span class="cat-icon">🎨</span> CSS3, Flexbox &amp; Grid</h3>
+            <p class="cat-desc">Responsive layouts, mobile-first design, CSS custom variables, keyframe animations, and media queries.</p>
+            <div class="skill-bar-container">
+              <div class="skill-info">
+                <span>CSS Flexbox &amp; Grid Layouts</span>
+                <span>95%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" data-width="95%"></div></div>
+            </div>
+            <div class="skill-bar-container">
+              <div class="skill-info">
+                <span>Responsive Design &amp; Media Queries</span>
+                <span>92%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" data-width="92%"></div></div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3><span class="cat-icon">⚡</span> JavaScript ES6+</h3>
+            <p class="cat-desc">Modern DOM manipulation, async/await, REST API integration, state management, and event handling.</p>
+            <div class="skill-bar-container">
+              <div class="skill-info">
+                <span>DOM Manipulation &amp; Events</span>
+                <span>90%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" data-width="90%"></div></div>
+            </div>
+            <div class="skill-bar-container">
+              <div class="skill-info">
+                <span>Async JS &amp; Fetch API</span>
+                <span>88%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" data-width="88%"></div></div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3><span class="cat-icon">🔧</span> Tools &amp; Ecosystem</h3>
+            <p class="cat-desc">Git version control, GitHub repositories, npm, Express backend APIs, and Vite build tools.</p>
+            <div class="skill-bar-container">
+              <div class="skill-info">
+                <span>Git &amp; GitHub Version Control</span>
+                <span>92%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" data-width="92%"></div></div>
+            </div>
+            <div class="skill-bar-container">
+              <div class="skill-info">
+                <span>Node.js / Express Integration</span>
+                <span>85%</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" data-width="85%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Counter Section -->
+    <section class="stats-section" id="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number" data-target="15">0</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="100">0</div>
+            <div class="stat-label">% Responsive Layouts</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="6">0</div>
+            <div class="stat-label">Core Web Skills</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" data-target="99">0</div>
+            <div class="stat-label">% Clean Code Rating</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Showcase Section -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Projects Showcase</h2>
+          <p class="section-subtitle">Interactive web applications built with HTML, CSS, JavaScript, and Node.js</p>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="project-controls">
+          <div class="filter-buttons" id="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="web">Web UI</button>
+            <button class="filter-btn" data-filter="javascript">JavaScript App</button>
+            <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+          </div>
+
+          <div class="search-box">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="project-search" placeholder="Search projects by title or tag...">
+          </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projects-grid">
+          <!-- Project Card 1 -->
+          <article class="project-card" data-category="web" data-tags="html css flexbox grid javascript portfolio">
+            <div class="project-header">
+              <div class="project-category-badge">Web UI</div>
+              <div class="project-icon">💻</div>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Frontend Developer Portfolio</h3>
+              <p class="project-desc">A responsive portfolio site demonstrating semantic HTML5 tags, CSS Flexbox &amp; Grid layouts, custom CSS properties, theme switching, and real-time interactive JavaScript.</p>
+              <div class="project-tags">
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS Grid</span>
+                <span class="tag">Flexbox</span>
+                <span class="tag">JavaScript</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <button class="btn-link view-details-btn" data-project="1">View Details &rarr;</button>
+              <a href="https://github.com/animeshDevarkar/EDQUEST" target="_blank" rel="noopener" class="btn-icon-link" aria-label="GitHub Repository">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project Card 2 -->
+          <article class="project-card" data-category="javascript" data-tags="react javascript ui singlepage state hooks">
+            <div class="project-header">
+              <div class="project-category-badge">JavaScript App</div>
+              <div class="project-icon">⚛️</div>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Interactive UI Development Dashboard</h3>
+              <p class="project-desc">A feature-rich React application built with component modularity, state management, custom hooks, dynamic search filtering, and dark mode interface.</p>
+              <div class="project-tags">
+                <span class="tag">React.js</span>
+                <span class="tag">State Management</span>
+                <span class="tag">Custom Hooks</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <button class="btn-link view-details-btn" data-project="2">View Details &rarr;</button>
+              <a href="https://github.com/animeshDevarkar/EDQUEST" target="_blank" rel="noopener" class="btn-icon-link" aria-label="GitHub Repository">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project Card 3 -->
+          <article class="project-card" data-category="fullstack" data-tags="express nodejs backend api rest middleware auth">
+            <div class="project-header">
+              <div class="project-category-badge">Full-Stack</div>
+              <div class="project-icon">🚀</div>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">Express.js Production REST API &amp; Dashboard</h3>
+              <p class="project-desc">Robust backend REST API service built with Express.js featuring authentication middleware, rate limiting, centralized error handling, and web dashboard integration.</p>
+              <div class="project-tags">
+                <span class="tag">Express.js</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">REST API</span>
+                <span class="tag">Middleware</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <button class="btn-link view-details-btn" data-project="3">View Details &rarr;</button>
+              <a href="https://github.com/animeshDevarkar/EDQUEST" target="_blank" rel="noopener" class="btn-icon-link" aria-label="GitHub Repository">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Project Card 4 -->
+          <article class="project-card" data-category="fullstack" data-tags="mongodb mongoose database queries schema rest">
+            <div class="project-header">
+              <div class="project-category-badge">Full-Stack</div>
+              <div class="project-icon">🍃</div>
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">MongoDB &amp; Mongoose Digital Library System</h3>
+              <p class="project-desc">Comprehensive database system modeling relationships between Authors, Books, and Genres, complete with seed scripts, complex aggregation pipelines, and web UI interface.</p>
+              <div class="project-tags">
+                <span class="tag">MongoDB</span>
+                <span class="tag">Mongoose</span>
+                <span class="tag">Aggregation</span>
+                <span class="tag">Database</span>
+              </div>
+            </div>
+            <div class="project-footer">
+              <button class="btn-link view-details-btn" data-project="4">View Details &rarr;</button>
+              <a href="https://github.com/animeshDevarkar/EDQUEST" target="_blank" rel="noopener" class="btn-icon-link" aria-label="GitHub Repository">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="no-projects-message hidden" id="no-projects">
+          <p>No projects match your filter or search criteria.</p>
+          <button class="btn btn-outline" id="reset-filters">Reset Filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience & Education Timeline -->
+    <section class="section bg-alt" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Timeline &amp; Journey</h2>
+          <p class="section-subtitle">Academic &amp; practical milestones in web development</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2026 — Present</span>
+              <h3>Frontend &amp; Full-Stack Development Assignments</h3>
+              <p class="timeline-location">EDQUEST Developer Platform</p>
+              <p>Successfully engineered multiple project assignments covering HTML5, CSS Flexbox &amp; Grid, JavaScript ES6+, React.js UI, Node.js/Express APIs, MongoDB schemas, and Git version control workflows.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2025 — 2026</span>
+              <h3>Modern Web UI &amp; Responsive Engineering</h3>
+              <p class="timeline-location">Self-Directed &amp; Project Engineering</p>
+              <p>Focused on mastering CSS Grid architecture, Flexbox layouts, accessible DOM hierarchy, cross-device media query standardizations, and high-performance vanilla JS state management.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Get In Touch</h2>
+          <p class="section-subtitle">Have a question or proposal? Send a direct message below!</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Let's build something extraordinary together</h3>
+            <p>
+              I am available for frontend engineering roles, web development projects, or technical collaboration. Drop a line using the form or reach out directly via GitHub!
+            </p>
+
+            <div class="info-list">
+              <div class="info-item">
+                <div class="info-icon">📧</div>
+                <div>
+                  <h4>Email</h4>
+                  <p>animeshdevarkar2005@gmail.com</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">🐙</div>
+                <div>
+                  <h4>GitHub Repository</h4>
+                  <p><a href="https://github.com/animeshDevarkar/EDQUEST" target="_blank" rel="noopener">github.com/animeshDevarkar/EDQUEST</a></p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div>
+                  <h4>Location</h4>
+                  <p>Maharashtra, India</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form-container">
+            <form id="contact-form" novalidate>
+              <div class="form-group">
+                <label for="contact-name">Full Name <span class="required">*</span></label>
+                <input type="text" id="contact-name" name="name" placeholder="John Doe" required>
+                <span class="error-msg" id="name-error">Please enter your name (min 2 characters).</span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-email">Email Address <span class="required">*</span></label>
+                <input type="email" id="contact-email" name="email" placeholder="john@example.com" required>
+                <span class="error-msg" id="email-error">Please enter a valid email address.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-subject">Subject</label>
+                <input type="text" id="contact-subject" name="subject" placeholder="Project Inquiry / Feedback">
+              </div>
+
+              <div class="form-group">
+                <label for="contact-message">Message <span class="required">*</span></label>
+                <textarea id="contact-message" name="message" rows="5" placeholder="Hi Animesh, I would like to discuss..." required></textarea>
+                <span class="error-msg" id="message-error">Please enter a message (min 10 characters).</span>
+              </div>
+
+              <button type="submit" class="btn btn-primary full-width" id="submit-btn">
+                <span>Send Message</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Project Details Modal Dialog -->
+  <div class="modal-backdrop hidden" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-header">
+        <span class="modal-badge" id="modal-category">Category</span>
+        <h3 id="modal-title">Project Title</h3>
+      </div>
+      <div class="modal-body">
+        <p id="modal-desc">Project details and full breakdown will load here.</p>
+        
+        <h4>Key Technical Highlights:</h4>
+        <ul id="modal-highlights" class="modal-list">
+          <li>Responsive CSS Grid &amp; Flexbox layout design</li>
+          <li>Semantic HTML5 structure</li>
+          <li>Interactive DOM event handling</li>
+        </ul>
+
+        <h4>Tech Stack:</h4>
+        <div id="modal-tags" class="project-tags">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="https://github.com/animeshDevarkar/EDQUEST" id="modal-repo-link" target="_blank" rel="noopener" class="btn btn-primary">View Source Code on GitHub</a>
+        <button class="btn btn-secondary" id="modal-close-btn">Close Window</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scroll To Top Button -->
+  <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+  </button>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="#hero" class="nav-logo">
+          <span class="logo-accent">&lt;</span>Animesh<span class="logo-accent">/&gt;</span>
+        </a>
+        <p>Frontend Development Assignment — EDQUEST Monorepo Submission</p>
+      </div>
+      <div class="footer-copy">
+        &copy; 2026 Animesh Devarkar. Built with HTML5, CSS3 &amp; Vanilla JavaScript.
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

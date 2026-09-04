@@ -14,6 +14,7 @@ Welcome to the central repository for **EDquest** development assignments and pr
 | **4** | [Interactive UI Development with React](./Interactive%20UI%20Development%20with%20React/) | React, Vite, Vitest, Lucide Icons, Modern CSS | Completed | [README](./Interactive%20UI%20Development%20with%20React/README.md) |
 | **5** | [MongoDB Fundamentals Assignment](./MongoDB%20Fundamentals%20Assignment/) | Node.js, MongoDB, Mongoose, Express, BSON, Aggregations | Completed | [README](./MongoDB%20Fundamentals%20Assignment/README.md) \| [Research Report](./MongoDB%20Fundamentals%20Assignment/REPORT.md) |
 | **6** | [Express.js Complete Assignment](./Express.js%20Complete%20Assignment/) | Express.js, Node.js, Helmet, Rate-Limit, Compression | Completed | [README](./Express.js%20Complete%20Assignment/README.md) \| [Guide](./Express.js%20Complete%20Assignment/EXPRESS_JS_COMPLETE_GUIDE.md) |
+| **7** | [Frontend Development Assignment](./Frontend%20Development%20Assignment/) | HTML5, CSS Flexbox/Grid, Vanilla JS ES6+, Responsive UI | Completed | [README](./Frontend%20Development%20Assignment/README.md) |
 
 ---
 
@@ -23,6 +24,11 @@ Each subfolder is an independent, self-contained project with its own `package.j
 
 ```
 EDQUEST/
+├── Frontend Development Assignment/
+│   ├── index.html           # Semantic HTML5 document structure
+│   ├── styles.css           # CSS3 Flexbox, Grid, Custom Variables & Responsive Breakpoints
+│   ├── script.js           # Interactive JS Engine (filtering, search, modal, theme, validation)
+│   └── README.md            # Comprehensive project design documentation & Figma concept
 ├── Express.js Complete Assignment/
 │   ├── src/                 # Controllers, Middlewares, Services, Routes & Public Web Client
 │   ├── test/                # Automated Native Node Test Runner suite (10 tests)
