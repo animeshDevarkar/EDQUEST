@@ -9,8 +9,8 @@ async function runMongoShellQueryDemos() {
   console.log('   MONGODB FUNDAMENTALS ASSIGNMENT: QUERY & SHELL DEMO    ');
   console.log('===========================================================\n');
 
-  await seedDatabase();
-  await connectDB();
+  // Seed database keeping active DB connection open
+  await seedDatabase(false);
 
   try {
     // -----------------------------------------------------------------

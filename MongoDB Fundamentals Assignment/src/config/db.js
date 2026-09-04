@@ -15,7 +15,7 @@ async function connectDB(customUri = null) {
   if (!uri) {
     try {
       // Fallback: Try local MongoDB default URI first
-      const defaultLocalUri = 'mongodb://127.0.1:27017/library_system';
+      const defaultLocalUri = 'mongodb://127.0.0.1:27017/library_system';
       await mongoose.connect(defaultLocalUri, { serverSelectionTimeoutMS: 2000 });
       console.log(' Connected to local MongoDB daemon at:', defaultLocalUri);
       return mongoose.connection;
@@ -48,6 +48,7 @@ async function disconnectDB() {
     await mongoServer.stop();
     console.log(' Stopped in-memory MongoDB instance');
     mongoServer = null;
+    delete process.env.MONGODB_URI;
   }
 }
 

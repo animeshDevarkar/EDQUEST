@@ -74,7 +74,7 @@ const genresData = [
   }
 ];
 
-async function seedDatabase() {
+async function seedDatabase(disconnectAfter = true) {
   try {
     console.log(' Starting database seed sequence...');
     await connectDB();
@@ -215,7 +215,9 @@ async function seedDatabase() {
   } catch (error) {
     console.error(' Error seeding database:', error);
   } finally {
-    await disconnectDB();
+    if (disconnectAfter) {
+      await disconnectDB();
+    }
   }
 }
 
