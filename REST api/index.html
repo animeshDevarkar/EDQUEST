@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REST Weather API Explorer & Visualizer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="logo">
+      <i class="fa-solid fa-cloud-bolt logo-icon"></i>
+      <span>REST Weather<span class="highlight">API</span></span>
+    </div>
+    <nav class="nav-links">
+      <button class="nav-btn active" data-tab="dashboard-view"><i class="fa-solid fa-chart-line"></i> Dashboard</button>
+      <button class="nav-btn" data-tab="inspector-view"><i class="fa-solid fa-code"></i> API Inspector</button>
+      <button class="nav-btn" data-tab="docs-view"><i class="fa-solid fa-book-open"></i> API Documentation & Case Studies</button>
+    </nav>
+    <div class="api-status-badge">
+      <span class="status-dot"></span> REST API Active (Open-Meteo)
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- View 1: Weather Dashboard -->
+    <section id="dashboard-view" class="view-section active">
+      <!-- Search & Controls -->
+      <div class="search-container card">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="city-input" placeholder="Search city (e.g., London, Tokyo, New York, Mumbai)..." autocomplete="off">
+          <button id="search-btn" class="primary-btn"><i class="fa-solid fa-paper-plane"></i> Search</button>
+          <button id="geo-btn" class="secondary-btn" title="Use Current Location"><i class="fa-solid fa-location-crosshairs"></i></button>
+        </div>
+        <div id="autocomplete-results" class="autocomplete-list hidden"></div>
+
+        <!-- Quick Location Presets -->
+        <div class="preset-locations">
+          <span class="preset-label">Popular Cities:</span>
+          <button class="preset-btn" data-city="London">London</button>
+          <button class="preset-btn" data-city="New York">New York</button>
+          <button class="preset-btn" data-city="Tokyo">Tokyo</button>
+          <button class="preset-btn" data-city="Paris">Paris</button>
+          <button class="preset-btn" data-city="Mumbai">Mumbai</button>
+          <button class="preset-btn" data-city="Sydney">Sydney</button>
+        </div>
+      </div>
+
+      <!-- Loading Spinner -->
+      <div id="loader" class="loader-container hidden">
+        <div class="spinner"></div>
+        <p>Fetching REST API data from Open-Meteo endpoints...</p>
+      </div>
+
+      <!-- Error Alert -->
+      <div id="error-banner" class="error-banner hidden">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span id="error-message">Error fetching REST API data.</span>
+      </div>
+
+      <!-- Main Weather Dashboard Grid -->
+      <div id="weather-content" class="dashboard-grid">
+        
+        <!-- Main Current Weather Card -->
+        <div class="card current-weather-card">
+          <div class="card-header-badge">
+            <span class="live-pill"><i class="fa-solid fa-circle-dot"></i> Live HTTP GET Payload</span>
+            <span id="location-coords" class="coords-tag">Lat: -- | Lon: --</span>
+          </div>
+          
+          <div class="weather-primary-info">
+            <div>
+              <h1 id="city-name">Loading...</h1>
+              <p id="weather-date" class="date-subtitle">--</p>
+              <p id="weather-description" class="condition-badge">--</p>
+            </div>
+            <div class="weather-temp-container">
+              <div id="weather-icon" class="weather-main-icon"><i class="fa-solid fa-sun"></i></div>
+              <div class="temp-wrapper">
+                <span id="current-temp" class="temp-value">--</span>
+                <span class="temp-unit">°C</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="weather-sub-metrics">
+            <div class="sub-metric">
+              <i class="fa-solid fa-temperature-arrow-up"></i>
+              <span>High: <strong id="high-temp">--°C</strong></span>
+            </div>
+            <div class="sub-metric">
+              <i class="fa-solid fa-temperature-arrow-down"></i>
+              <span>Low: <strong id="low-temp">--°C</strong></span>
+            </div>
+            <div class="sub-metric">
+              <i class="fa-solid fa-wind"></i>
+              <span>Wind: <strong id="wind-speed">-- km/h</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric Details Cards Grid -->
+        <div class="metrics-grid">
+          <div class="card metric-card">
+            <div class="metric-icon"><i class="fa-solid fa-droplet"></i></div>
+            <div class="metric-data">
+              <span class="metric-title">Humidity</span>
+              <span id="humidity-val" class="metric-value">--%</span>
+              <span class="metric-subtext">Relative air moisture</span>
+            </div>
+          </div>
+
+          <div class="card metric-card">
+            <div class="metric-icon"><i class="fa-solid fa-gauge-high"></i></div>
+            <div class="metric-data">
+              <span class="metric-title">Air Pressure</span>
+              <span id="pressure-val" class="metric-value">-- hPa</span>
+              <span class="metric-subtext">Surface pressure level</span>
+            </div>
+          </div>
+
+          <div class="card metric-card">
+            <div class="metric-icon"><i class="fa-solid fa-compass"></i></div>
+            <div class="metric-data">
+              <span class="metric-title">Wind Direction</span>
+              <span id="wind-dir-val" class="metric-value">--°</span>
+              <span id="wind-dir-text" class="metric-subtext">Direction compass</span>
+            </div>
+          </div>
+
+          <div class="card metric-card">
+            <div class="metric-icon"><i class="fa-solid fa-cloud-showers-heavy"></i></div>
+            <div class="metric-data">
+              <span class="metric-title">Precipitation</span>
+              <span id="precip-val" class="metric-value">-- mm</span>
+              <span class="metric-subtext">Expected rainfall</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hourly Forecast Section -->
+        <div class="card full-width-card">
+          <h2 class="section-title"><i class="fa-regular fa-clock"></i> 24-Hour Temperature Forecast (REST API Payload)</h2>
+          <div id="hourly-forecast-container" class="hourly-forecast-grid">
+            <!-- Hourly items rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- 7-Day Daily Forecast Section -->
+        <div class="card full-width-card">
+          <h2 class="section-title"><i class="fa-regular fa-calendar-days"></i> 7-Day Weather Forecast</h2>
+          <div id="daily-forecast-container" class="daily-forecast-grid">
+            <!-- Daily items rendered dynamically -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- View 2: REST API Live Inspector -->
+    <section id="inspector-view" class="view-section">
+      <div class="card">
+        <h2 class="section-title"><i class="fa-solid fa-network-wired"></i> Live REST API Request & Response Inspector</h2>
+        <p class="section-desc">Inspect real-time HTTP GET transactions, parsed JSON payloads, and response headers returned by the weather REST API endpoints.</p>
+
+        <!-- API Endpoint Banner -->
+        <div class="api-request-box">
+          <div class="http-method-badge">GET</div>
+          <div id="inspector-url" class="api-url-text">https://api.open-meteo.com/v1/forecast?...</div>
+          <button id="copy-url-btn" class="icon-btn" title="Copy Endpoint URL"><i class="fa-regular fa-copy"></i></button>
+        </div>
+
+        <!-- Request Meta Info -->
+        <div class="inspector-meta-bar">
+          <div class="meta-item"><span class="meta-label">Status Code:</span> <span id="inspector-status" class="status-200">200 OK</span></div>
+          <div class="meta-item"><span class="meta-label">Content-Type:</span> <span class="meta-val">application/json; charset=utf-8</span></div>
+          <div class="meta-item"><span class="meta-label">Response Time:</span> <span id="inspector-latency" class="meta-val">120 ms</span></div>
+          <div class="meta-item"><span class="meta-label">Data Format:</span> <span class="meta-val">JSON Payload</span></div>
+        </div>
+
+        <!-- JSON Output / Code Snippets Dual Pane -->
+        <div class="inspector-dual-pane">
+          <!-- Left Pane: JSON Payload Tree -->
+          <div class="pane-column">
+            <div class="pane-header">
+              <span><i class="fa-solid fa-code-branch"></i> Live JSON Response Body</span>
+              <button id="copy-json-btn" class="small-btn"><i class="fa-regular fa-copy"></i> Copy JSON</button>
+            </div>
+            <pre id="json-viewer" class="json-code-block"></pre>
+          </div>
+
+          <!-- Right Pane: Code Snippet Generator -->
+          <div class="pane-column">
+            <div class="pane-header">
+              <span><i class="fa-solid fa-terminal"></i> Client Code Snippets</span>
+              <div class="snippet-tabs">
+                <button class="snippet-tab active" data-lang="js">JavaScript</button>
+                <button class="snippet-tab" data-lang="python">Python</button>
+                <button class="snippet-tab" data-lang="curl">cURL</button>
+              </div>
+            </div>
+            <pre id="code-snippet-box" class="json-code-block snippet-block"></pre>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- View 3: API Documentation & Theory -->
+    <section id="docs-view" class="view-section">
+      <div class="card docs-container">
+        <h1><i class="fa-solid fa-book"></i> REST API Theory, JSON Parsing & Industry Case Studies</h1>
+
+        <div class="doc-block">
+          <h2>1. Fundamental REST API Concepts</h2>
+          <p><strong>REST (Representational State Transfer)</strong> is an architectural style for designing networked applications. Introduced by Roy Fielding in 2000, REST leverages standard HTTP verbs and stateless communication to enable web service scalability and interoperability.</p>
+          
+          <h3>Core Constraints of REST Architecture:</h3>
+          <ul>
+            <li><strong>Statelessness:</strong> Every HTTP request from a client to a server must contain all necessary information for the server to understand and fulfill the request. The server stores no client session context.</li>
+            <li><strong>Client-Server Separation:</strong> Concerns of the UI are decoupled from data storage concerns, improving portability and scalability.</li>
+            <li><strong>Cacheability:</strong> Responses must explicitly define themselves as cacheable or non-cacheable to prevent client stale data issues and reduce bandwidth.</li>
+            <li><strong>Uniform Interface:</strong> Consistent resource URIs, standardized HTTP methods (`GET`, `POST`, `PUT`, `DELETE`), and standard MIME media types (such as `application/json`).</li>
+          </ul>
+        </div>
+
+        <div class="doc-block">
+          <h2>2. HTTP Request Methods & Status Codes</h2>
+          <div class="table-responsive">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Description</th>
+                  <th>Idempotent</th>
+                  <th>Usage in Weather App</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>GET</code></td>
+                  <td>Retrieves data from a specified resource</td>
+                  <td>Yes</td>
+                  <td>Fetching geocoding coordinates & weather forecast JSON payloads</td>
+                </tr>
+                <tr>
+                  <td><code>POST</code></td>
+                  <td>Submits data to create a new resource</td>
+                  <td>No</td>
+                  <td>Creating user preferences or logging telemetry data</td>
+                </tr>
+                <tr>
+                  <td><code>PUT</code></td>
+                  <td>Replaces an existing resource or creates if absent</td>
+                  <td>Yes</td>
+                  <td>Updating user profile configurations</td>
+                </tr>
+                <tr>
+                  <td><code>DELETE</code></td>
+                  <td>Removes the specified resource</td>
+                  <td>Yes</td>
+                  <td>Clearing cached search history</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Common HTTP Status Codes:</h3>
+          <ul>
+            <li><code>200 OK</code>: Request succeeded; requested data returned in payload.</li>
+            <li><code>400 Bad Request</code>: Malformed request parameters (e.g. out-of-range coordinates).</li>
+            <li><code>404 Not Found</code>: Target URI resource or location could not be located.</li>
+            <li><code>500 Internal Server Error</code>: Remote API server encountered an unexpected failure.</li>
+          </ul>
+        </div>
+
+        <div class="doc-block">
+          <h2>3. Modern JSON Handling Best Practices</h2>
+          <p>JSON (JavaScript Object Notation) is the de facto standard format for REST API data exchange due to its lightweight syntax and native compatibility with JavaScript environments.</p>
+
+          <div class="code-example-card">
+            <h4>Handling Asynchronous JSON Fetching in JavaScript:</h4>
+            <pre class="json-code-block"><code>async function fetchWeatherData(lat, lon) {
+  try {
+    const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+    
+    // Check HTTP Response Status
+    if (!response.ok) {
+      throw new Error(`HTTP Error Status: ${response.status}`);
+    }
+    
+    // Parse JSON Body asynchronously
+    const data = await response.json();
+    console.log("Temperature:", data.current_weather.temperature);
+    return data;
+  } catch (error) {
+    console.error("Failed to parse JSON response:", error.message);
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="doc-block">
+          <h2>4. Industry Case Studies & Applications</h2>
+          <div class="case-study-grid">
+            <div class="case-card">
+              <h3><i class="fa-brands fa-stripe text-indigo"></i> Stripe API</h3>
+              <p>Stripe provides a robust RESTful API that handles billions of financial transactions globally. By leveraging predictable URIs, HTTP authentication, and JSON bodies, developers integrate payment processing in minutes.</p>
+            </div>
+            <div class="case-card">
+              <h3><i class="fa-solid fa-message text-green"></i> Twilio API</h3>
+              <p>Twilio exposes REST endpoints for sending SMS, voice calls, and multi-channel messages. Developers send simple HTTP POST requests with JSON/Form data to trigger global telecommunications operations.</p>
+            </div>
+            <div class="case-card">
+              <h3><i class="fa-solid fa-map-location-dot text-red"></i> Google Maps Platform</h3>
+              <p>Google Maps REST APIs provide directions, elevation, distance matrix calculations, and places autocomplete to mobile and web applications worldwide via structured JSON endpoints.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>EDQUEST REST API Assignment &copy; 2026 | Developed by <strong>animeshDevarkar</strong></p>
+    <p class="footer-sub">Powered by Open-Meteo REST API & HTML5/CSS3/JavaScript</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
