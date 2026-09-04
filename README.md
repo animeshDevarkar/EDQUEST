@@ -16,6 +16,7 @@ Welcome to the central repository for **EDquest** development assignments and pr
 | **6** | [Express.js Complete Assignment](./Express.js%20Complete%20Assignment/) | Express.js, Node.js, Helmet, Rate-Limit, Compression | Completed | [README](./Express.js%20Complete%20Assignment/README.md) \| [Guide](./Express.js%20Complete%20Assignment/EXPRESS_JS_COMPLETE_GUIDE.md) |
 | **7** | [Frontend Development Assignment](./Frontend%20Development%20Assignment/) | HTML5, CSS Flexbox/Grid, Vanilla JS ES6+, Responsive UI | Completed | [README](./Frontend%20Development%20Assignment/README.md) |
 | **8** | [Performance Optimization Assignment](./Performance%20Optimization%20Assignment/) | React 19, Vite, Vitest, React Profiler, Memoization, Virtualization | Completed | [README](./Performance%20Optimization%20Assignment/README.md) \| [Case Study](./Performance%20Optimization%20Assignment/CASE_STUDY_REPORT.md) |
+| **9** | [React App Project](./React%20App%20Project/) | React 19, Vite, Vitest, Component Props & Data Flow, Modern CSS | Completed | [README](./React%20App%20Project/README.md) |
 
 ---
 
