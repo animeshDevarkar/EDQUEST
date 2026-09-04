@@ -13,6 +13,7 @@ Welcome to the central repository for **EDquest** development assignments and pr
 | **3** | [Mongoose Assignment](./mongoose-assignment/) | Node.js, MongoDB, Mongoose ODM | Completed | [Project Folder](./mongoose-assignment/) |
 | **4** | [Interactive UI Development with React](./Interactive%20UI%20Development%20with%20React/) | React, Vite, Vitest, Lucide Icons, Modern CSS | Completed | [README](./Interactive%20UI%20Development%20with%20React/README.md) |
 | **5** | [MongoDB Fundamentals Assignment](./MongoDB%20Fundamentals%20Assignment/) | Node.js, MongoDB, Mongoose, Express, BSON, Aggregations | Completed | [README](./MongoDB%20Fundamentals%20Assignment/README.md) \| [Research Report](./MongoDB%20Fundamentals%20Assignment/REPORT.md) |
+| **6** | [Express.js Complete Assignment](./Express.js%20Complete%20Assignment/) | Express.js, Node.js, Helmet, Rate-Limit, Compression | Completed | [README](./Express.js%20Complete%20Assignment/README.md) \| [Guide](./Express.js%20Complete%20Assignment/EXPRESS_JS_COMPLETE_GUIDE.md) |
 
 ---
 
@@ -22,6 +23,11 @@ Each subfolder is an independent, self-contained project with its own `package.j
 
 ```
 EDQUEST/
+├── Express.js Complete Assignment/
+│   ├── src/                 # Controllers, Middlewares, Services, Routes & Public Web Client
+│   ├── test/                # Automated Native Node Test Runner suite (10 tests)
+│   ├── README.md            # Comprehensive Express.js Masterclass & API Documentation
+│   └── EXPRESS_JS_COMPLETE_GUIDE.md # Technical Architecture Guide
 ├── MongoDB Fundamentals Assignment/
 │   ├── src/                 # Connection manager, Mongoose models, controllers & CLI scripts
 │   ├── public/              # Interactive Library Dashboard web UI
