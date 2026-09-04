@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Authentication Fundamentals Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔐 API Authentication Fundamentals</h1>
+      <p>Interactive Security Control Center, JWT Inspector & Authentication Protocol Explorer</p>
+    </header>
+
+    <div class="grid">
+      <!-- 1. Authentication & Token Generation -->
+      <div class="card">
+        <h2>
+          1. User Authentication & JWT Issue
+          <span class="badge badge-jwt">Token-Based (JWT)</span>
+        </h2>
+        <div class="form-group">
+          <label>Presets for Quick Testing:</label>
+          <div class="btn-group">
+            <button type="button" class="btn-secondary" onclick="fillPreset('admin')">Fill Admin Credentials</button>
+            <button type="button" class="btn-secondary" onclick="fillPreset('user')">Fill Student Credentials</button>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="loginEmail" value="student@edquest.com">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="loginPassword" value="UserPass123!">
+          </div>
+        </div>
+        
+        <div class="btn-group">
+          <button class="btn-success" onclick="loginUser()">Login & Issue JWT</button>
+        </div>
+
+        <hr style="margin: 15px 0; border-color: var(--border);">
+
+        <h3 style="font-size: 0.95rem; margin-bottom: 10px;">Register New User</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="form-group">
+            <label>Username</label>
+            <input type="text" id="regUsername" placeholder="johndoe">
+          </div>
+          <div class="form-group">
+            <label>Role</label>
+            <select id="regRole">
+              <option value="user">User (Standard)</option>
+              <option value="admin">Admin (Elevated)</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="regEmail" placeholder="john@example.com">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="regPassword" placeholder="StrongPass123!">
+          </div>
+        </div>
+        <button class="btn-secondary" onclick="registerUser()">Register User (Bcrypt Hashed)</button>
+
+        <div class="response-box" id="authResponse">
+          Response output will appear here...
+        </div>
+      </div>
+
+      <!-- 2. JWT Inspector & Visualizer -->
+      <div class="card">
+        <h2>
+          2. Live JWT Token Inspector
+          <span class="badge badge-jwt">RFC 7519 Structure</span>
+        </h2>
+        <div class="form-group">
+          <label>Active JWT Access Token</label>
+          <textarea id="tokenInput" rows="3" placeholder="Paste or Login to view JWT Token..." oninput="inspectToken()"></textarea>
+        </div>
+
+        <div class="jwt-breakdown">
+          <div class="jwt-part">
+            <div class="jwt-part-title jwt-header">1. Header (Algorithm & Token Type)</div>
+            <pre id="jwtHeaderContent" style="font-size: 0.8rem; margin:0;">Login or paste token to inspect...</pre>
+          </div>
+          <div class="jwt-part">
+            <div class="jwt-part-title jwt-payload">2. Payload (Claims & User Data)</div>
+            <pre id="jwtPayloadContent" style="font-size: 0.8rem; margin:0;">Login or paste token to inspect...</pre>
+          </div>
+          <div class="jwt-part">
+            <div class="jwt-part-title jwt-signature">3. Signature (HMACSHA256 Verification)</div>
+            <pre id="jwtSigContent" style="font-size: 0.8rem; margin:0;">Login or paste token to inspect...</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Protected Route Testing & RBAC -->
+      <div class="card">
+        <h2>
+          3. Protected Route & RBAC Testing
+          <span class="badge badge-jwt">Role Enforcement</span>
+        </h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+          Test how server validates Bearer tokens and enforces Role-Based Access Control (RBAC).
+        </p>
+        <div class="btn-group" style="margin-bottom: 15px;">
+          <button onclick="testProtected('/api/protected/user-dashboard')">Test User Dashboard (Role: user/admin)</button>
+          <button class="btn-amber" onclick="testProtected('/api/protected/admin-dashboard')">Test Admin Portal (Role: admin only)</button>
+        </div>
+        <div class="response-box" id="protectedResponse">
+          Protected endpoint response will appear here...
+        </div>
+      </div>
+
+      <!-- 4. API Key & OAuth 2.0 Flow Simulator -->
+      <div class="card">
+        <h2>
+          4. API Key & OAuth 2.0 Simulator
+          <span class="badge badge-apikey">API Key</span>
+          <span class="badge badge-oauth">OAuth 2.0</span>
+        </h2>
+
+        <h3 style="font-size: 0.95rem; margin-bottom: 8px;">A. Machine-to-Machine API Key Auth</h3>
+        <div class="form-group">
+          <label>API Key (Header: x-api-key)</label>
+          <input type="text" id="apiKeyInput" value="demo-api-key-partner-9988">
+        </div>
+        <button class="btn-secondary" onclick="testApiKey()">Execute API Key Request</button>
+
+        <hr style="margin: 15px 0; border-color: var(--border);">
+
+        <h3 style="font-size: 0.95rem; margin-bottom: 8px;">B. OAuth 2.0 Authorization Code Grant Flow</h3>
+        <div class="btn-group">
+          <button class="btn-amber" onclick="runOAuthStep1()">1. /authorize (Get Code)</button>
+          <button class="btn-amber" onclick="runOAuthStep2()">2. /token (Exchange Code)</button>
+          <button class="btn-amber" onclick="runOAuthStep3()">3. /userinfo (Resource Access)</button>
+        </div>
+
+        <div class="response-box" id="apiKeyResponse" style="margin-top: 15px;">
+          API Key / OAuth responses will appear here...
+        </div>
+        <div class="response-box" id="oauthResponse" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

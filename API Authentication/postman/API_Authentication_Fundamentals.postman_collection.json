@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "a7b3c2d1-4e5f-6a7b-8c9d-0e1f2a3b4c5d",
+		"name": "API Authentication Fundamentals - EDQuest Collection",
+		"description": "Postman Collection for testing Token-based JWT Authentication, API Keys, and OAuth 2.0 Authorization Code simulation.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. User Registration",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"postman_student\",\n  \"email\": \"postman.student@example.com\",\n  \"password\": \"SecurePass123!\",\n  \"role\": \"user\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/auth/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			}
+		},
+		{
+			"name": "2. User Login & Issue JWT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if (jsonData.auth && jsonData.auth.accessToken) {",
+							"    pm.environment.set('accessToken', jsonData.auth.accessToken);",
+							"    pm.environment.set('refreshToken', jsonData.auth.refreshToken);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"student@edquest.com\",\n  \"password\": \"UserPass123!\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/auth/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			}
+		},
+		{
+			"name": "3. Get Protected Profile (JWT Bearer)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/auth/profile",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"profile"
+					]
+				}
+			}
+		},
+		{
+			"name": "4. Protected User Dashboard",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/protected/user-dashboard",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"protected",
+						"user-dashboard"
+					]
+				}
+			}
+		},
+		{
+			"name": "5. Admin Dashboard (RBAC Check)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/protected/admin-dashboard",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"protected",
+						"admin-dashboard"
+					]
+				}
+			}
+		},
+		{
+			"name": "6. Machine-to-Machine API Key",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "demo-api-key-partner-9988",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/protected/apikey-data",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"protected",
+						"apikey-data"
+					]
+				}
+			}
+		},
+		{
+			"name": "7. OAuth 2.0 - Authorize",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/oauth/authorize?client_id=edquest_demo_client_id&response_type=code&scope=read:profile&state=postman_test_123",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"oauth",
+						"authorize"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "edquest_demo_client_id"
+						},
+						{
+							"key": "response_type",
+							"value": "code"
+						},
+						{
+							"key": "scope",
+							"value": "read:profile"
+						},
+						{
+							"key": "state",
+							"value": "postman_test_123"
+						}
+					]
+				}
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		}
+	]
+}
