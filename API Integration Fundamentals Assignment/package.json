@@ -1,0 +1,22 @@
+{
+  "name": "api-integration-fundamentals-demo",
+  "version": "1.0.0",
+  "description": "Interactive local demonstration for API Integration Fundamentals Assignment",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "api",
+    "rest",
+    "graphql",
+    "integration",
+    "assignment"
+  ],
+  "author": "Animesh Devarkar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
