@@ -1,0 +1,25 @@
+{
+  "name": "ecommerce-order-service",
+  "version": "1.0.0",
+  "description": "Demonstration project for Version Control, Automated Testing with Jest, and CI/CD Pipelines",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "serve": "node server.js",
+    "test": "node node_modules/jest/bin/jest.js --verbose",
+    "test:coverage": "node node_modules/jest/bin/jest.js --coverage",
+    "test:watch": "node node_modules/jest/bin/jest.js --watch"
+  },
+  "keywords": [
+    "version-control",
+    "jest",
+    "testing",
+    "cicd",
+    "github-actions"
+  ],
+  "author": "Animesh Devarkar",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^30.5.1"
+  }
+}

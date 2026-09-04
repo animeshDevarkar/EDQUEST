@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Version Control, Testing & Deployment Assignment Report - Animesh Devarkar</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm 18mm 20mm 18mm;
+      @bottom-right {
+        content: counter(page);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.6;
+      color: #1e293b;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Cover Page */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 240mm;
+      padding: 40px 20px 20px 20px;
+      page-break-after: always;
+      border-bottom: 4px solid #2563eb;
+    }
+
+    .cover-header {
+      margin-top: 60px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      font-size: 9pt;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background-color: #eff6ff;
+      color: #2563eb;
+      border-radius: 9999px;
+      border: 1px solid #bfdbfe;
+      margin-bottom: 20px;
+    }
+
+    .cover-title {
+      font-size: 28pt;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.2;
+      margin: 0 0 16px 0;
+    }
+
+    .cover-subtitle {
+      font-size: 14pt;
+      font-weight: 400;
+      color: #64748b;
+      margin: 0 0 40px 0;
+      line-height: 1.5;
+    }
+
+    .cover-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 60px;
+    }
+
+    .meta-item label {
+      display: block;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .meta-item value {
+      display: block;
+      font-size: 11pt;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .cover-footer {
+      font-size: 9pt;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 16px;
+    }
+
+    /* Content Styling */
+    h1, h2, h3, h4 {
+      color: #0f172a;
+      font-weight: 700;
+      page-break-after: avoid;
+    }
+
+    h1 {
+      font-size: 18pt;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      color: #1e3a8a;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    h2 {
+      font-size: 13pt;
+      margin-top: 24px;
+      margin-bottom: 10px;
+      color: #1e40af;
+    }
+
+    h3 {
+      font-size: 11.5pt;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin: 0 0 12px 0;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 0 0 14px 0;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* Callout Boxes */
+    .callout {
+      border-left: 4px solid #2563eb;
+      background-color: #f8fafc;
+      padding: 12px 16px;
+      margin: 16px 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 9.5pt;
+    }
+
+    .callout.tip {
+      border-color: #10b981;
+      background-color: #f0fdf4;
+    }
+
+    .callout.important {
+      border-color: #f59e0b;
+      background-color: #fffbeb;
+    }
+
+    .callout-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px 0;
+      font-size: 9pt;
+      page-break-inside: avoid;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    /* Code Snippets */
+    pre {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 12px 14px;
+      border-radius: 6px;
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-size: 8.5pt;
+      line-height: 1.45;
+      overflow-x: auto;
+      margin: 12px 0 16px 0;
+      page-break-inside: avoid;
+    }
+
+    code {
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      font-size: 9pt;
+      background-color: #f1f5f9;
+      color: #0969da;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    pre code {
+      background-color: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    .toc {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      page-break-after: always;
+    }
+
+    .toc h2 {
+      margin-top: 0;
+      border-bottom: 1px solid #cbd5e1;
+      padding-bottom: 8px;
+    }
+
+    .toc-list {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .toc-list li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 10pt;
+    }
+
+    .toc-dots {
+      flex: 1;
+      border-bottom: 1px dotted #94a3b8;
+      margin: 0 8px 4px 8px;
+    }
+
+    .flowchart {
+      background-color: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      padding: 14px;
+      border-radius: 6px;
+      font-family: Consolas, monospace;
+      font-size: 8.5pt;
+      line-height: 1.4;
+      margin: 14px 0;
+      white-space: pre;
+      page-break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <div class="cover-page">
+    <div class="cover-header">
+      <span class="badge">Comprehensive Technical Report</span>
+      <h1 class="cover-title">Version Control, Software Testing & Continuous Deployment</h1>
+      <p class="cover-subtitle">An In-Depth Exploration of Modern Source Code Management, Automated Quality Assurance Pipelines, and Cloud Continuous Delivery Architecture</p>
+    </div>
+
+    <div class="cover-meta-grid">
+      <div class="meta-item">
+        <label>Student Name</label>
+        <value>Animesh Devarkar</value>
+      </div>
+      <div class="meta-item">
+        <label>Course / Module</label>
+        <value>Version Control, Testing & Deployment</value>
+      </div>
+      <div class="meta-item">
+        <label>Practical Project</label>
+        <value>E-Commerce Order & Discount Service (Jest Suite)</value>
+      </div>
+      <div class="meta-item">
+        <label>Repository URL</label>
+        <value>https://github.com/animeshDevarkar/version-control-testing-deployment</value>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <span>Academic & Engineering Assignment Submission • Generated with Complete Practical Verification</span>
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h2>Table of Contents</h2>
+    <ul class="toc-list">
+      <li><span>1. What is Version Control?</span><span class="toc-dots"></span><span>Section 1</span></li>
+      <li><span>2. Why Use Version Control?</span><span class="toc-dots"></span><span>Section 2</span></li>
+      <li><span>3. Overview of Version Control Systems</span><span class="toc-dots"></span><span>Section 3</span></li>
+      <li><span>4. Branching Strategies in Software Teams</span><span class="toc-dots"></span><span>Section 4</span></li>
+      <li><span>5. Merging in Version Control & Conflict Resolution</span><span class="toc-dots"></span><span>Section 5</span></li>
+      <li><span>6. Using Version Control Interfaces (CLI, GUI, Web)</span><span class="toc-dots"></span><span>Section 6</span></li>
+      <li><span>7. Types of Software Testing: From Unit to Acceptance</span><span class="toc-dots"></span><span>Section 7</span></li>
+      <li><span>8. Importance & Business Value of Automated Testing</span><span class="toc-dots"></span><span>Section 8</span></li>
+      <li><span>9. Implementing Tests in Code: Patterns & Best Practices</span><span class="toc-dots"></span><span>Section 9</span></li>
+      <li><span>10. Continuous Deployment Overview & Release Paradigms</span><span class="toc-dots"></span><span>Section 10</span></li>
+      <li><span>11. Deployment Pipelines Explained: Stage-by-Stage</span><span class="toc-dots"></span><span>Section 11</span></li>
+      <li><span>12. CI/CD in Practice: Automation with GitHub Actions</span><span class="toc-dots"></span><span>Section 12</span></li>
+      <li><span>13. Practical Project Implementation & Test Execution Report</span><span class="toc-dots"></span><span>Section 13</span></li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1 -->
+  <h1>1. What is Version Control?</h1>
+  <p>
+    <strong>Version Control</strong>, also known as source control or revision control, is a foundational software engineering practice and infrastructure class responsible for recording, tracking, and managing modifications made to computer code, assets, documentation, and configuration files over time.
+  </p>
+  <p>
+    At its mathematical and computational core, a Version Control System (VCS) models a project's evolution as a <em>Directed Acyclic Graph (DAG)</em> of immutable historical states or snapshots. Rather than overwriting files in place or maintaining fragile manual backups (such as <code>final_v2_really_final.zip</code>), a version control engine logs discrete change events—termed <strong>commits</strong> or revisions. Each commit records:
+  </p>
+  <ul>
+    <li><strong>Cryptographic Fingerprint:</strong> A unique hash (e.g., SHA-1 or SHA-256) ensuring data integrity and tamper-evidence.</li>
+    <li><strong>Delta / Snapshot Information:</strong> The exact line-by-line additions, deletions, and modifications made across files.</li>
+    <li><strong>Metadata Attribution:</strong> The author identity, committer identity, and timestamp.</li>
+    <li><strong>Ancestry Linkage:</strong> References to parent commit hashes, creating an unbroken lineage of project history.</li>
+    <li><strong>Commit Message:</strong> A structured rationale detailing <em>why</em> the modification was introduced.</li>
+  </ul>
+
+  <div class="callout">
+    <div class="callout-title">💡 Core Conceptual Definition</div>
+    Version control elevates code from a transient collection of text files into a permanent, audit-ready, time-travelable ledger of human engineering intent.
+  </div>
+
+  <!-- SECTION 2 -->
+  <h1>2. Why Use Version Control?</h1>
+  <p>
+    Modern software development is an inherently collaborative, high-velocity, and distributed discipline. Operating without version control introduces fatal operational liabilities. Version control provides several vital capabilities:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Capability</th>
+        <th style="width: 45%;">Engineering Functionality</th>
+        <th style="width: 30%;">Business Impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Complete Auditability & Provenance</strong></td>
+        <td>Answers who changed what line of code, when, and for what reason using commands like <code>git blame</code> and <code>git log</code>.</td>
+        <td>Regulatory compliance (SOC2, HIPAA, ISO-27001), forensic debugging, and accountability.</td>
+      </tr>
+      <tr>
+        <td><strong>Riskless Experimentation & Rollback</strong></td>
+        <td>Enables developers to branch out, test architectural changes, and instantly revert breaking changes with <code>git revert</code> or <code>git checkout</code>.</td>
+        <td>Near-zero downtime, reduced mean time to recovery (MTTR), and fearless engineering iteration.</td>
+      </tr>
+      <tr>
+        <td><strong>Concurrent Multi-Engineer Collaboration</strong></td>
+        <td>Allows hundreds of engineers to work on identical modules simultaneously without overwriting one another's work.</td>
+        <td>High organizational scalability and accelerated time-to-market.</td>
+      </tr>
+      <tr>
+        <td><strong>Branch Isolation & Environment Parity</strong></td>
+        <td>Decouples experimental features from production-ready code, facilitating controlled deployments to staging and production.</td>
+        <td>Stability of customer-facing environments and protected release cadences.</td>
+      </tr>
+      <tr>
+        <td><strong>Automated CI/CD Foundation</strong></td>
+        <td>Acts as the event-driven trigger for automated testing, linting, vulnerability scanning, container compilation, and deployments.</td>
+        <td>Elimination of error-prone manual deployments and consistent quality gates.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 3 -->
+  <div class="page-break"></div>
+  <h1>3. Overview of Version Control Systems</h1>
+  <p>
+    Version control architectures have evolved through three distinct generations: Local, Centralized, and Distributed architectures.
+  </p>
+
+  <div class="flowchart">
+[Generation 1: Local]          [Generation 2: Centralized (CVCS)]       [Generation 3: Distributed (DVCS)]
++-------------------+             +-----------------------+              +------------------------+
+| Local Disk Only   |             |   Central Server      |              | Full Clone per Machine |
+| RCS, SCCS         |             |   (SVN, CVS, Perforce)|              | (Git, Mercurial, Jujutsu)
+| (Single-user)     |             +-----------+-----------+              +------------+-----------+
++-------------------+                         |                                       |
+                                  +-----------+-----------+              +------------+-----------+
+                                  | Client 1  | Client 2  |              | Peer Dev A | Peer Dev B|
+                                  | (Delta)   | (Delta)   |              | (Full DAG) | (Full DAG)|
+                                  +-----------+-----------+              +------------+-----------+
+  </div>
+
+  <h2>3.1 Centralized Version Control Systems (CVCS)</h2>
+  <p>
+    Systems such as <strong>Apache Subversion (SVN)</strong>, <strong>CVS</strong>, and <strong>Perforce Helix Core</strong> rely on a singular central repository hosted on a dedicated server. Developers check out working copies containing only the latest file revisions.
+  </p>
+  <ul>
+    <li><strong>Advantages:</strong> Fine-grained path-level permission controls, intuitive centralized locks for binary game assets (e.g., in Unreal Engine pipelines with Perforce).</li>
+    <li><strong>Disadvantages:</strong> Single Point of Failure (SPOF); offline operations are impossible; branching and merging operations are computationally expensive and prone to merge hell.</li>
+  </ul>
+
+  <h2>3.2 Distributed Version Control Systems (DVCS)</h2>
+  <p>
+    Systems such as <strong>Git</strong> and <strong>Mercurial</strong> invert the centralized model. When an engineer clones a repository, they replicate the <em>entire</em> historical DAG, object database, and commit lineage onto their local workstation.
+  </p>
+  <ul>
+    <li><strong>Full Offline Autonomy:</strong> Developers commit, branch, view logs, and diff code with zero network latency.</li>
+    <li><strong>Redundancy & Resilience:</strong> Every developer’s machine serves as an offsite full backup of the entire codebase history.</li>
+    <li><strong>Micro-Branching:</strong> Lightweight pointer-based branches allow engineers to spawn and destroy task branches in milliseconds.</li>
+  </ul>
+
+  <!-- SECTION 4 -->
+  <h1>4. Branching Strategies</h1>
+  <p>
+    A branching strategy establishes the organizational conventions that govern how engineers isolate, develop, review, and integrate software changes.
+  </p>
+
+  <h2>4.1 GitFlow</h2>
+  <p>
+    Proposed by Vincent Driessen in 2010, GitFlow is a strict, scheduled-release model utilizing two persistent branches (<code>main</code> for production releases, <code>develop</code> for ongoing integration) alongside temporary supporting branches (<code>feature/*</code>, <code>release/*</code>, and <code>hotfix/*</code>).
+  </p>
+  <ul>
+    <li><strong>Best Suited For:</strong> Enterprise software with long support cycles, packaged desktop applications, and regulated embedded systems.</li>
+    <li><strong>Limitations:</strong> Overhead in managing branch merges; slow release velocity; high risk of merge conflicts during long-lived feature lifecycles.</li>
+  </ul>
+
+  <h2>4.2 GitHub Flow</h2>
+  <p>
+    A lightweight, velocity-oriented workflow optimized for SaaS and web services practicing continuous delivery:
+  </p>
+  <ol>
+    <li>Everything in the <code>main</code> branch is always releasable and production-ready.</li>
+    <li>To implement a change, create a descriptive branch from <code>main</code> (e.g., <code>feature/stripe-webhook</code>).</li>
+    <li>Commit locally and push regularly to the remote server.</li>
+    <li>Open a <strong>Pull Request (PR)</strong> for peer code review and automated CI validation.</li>
+    <li>Once approved and green CI checks pass, merge into <code>main</code> and deploy immediately.</li>
+  </ol>
+
+  <h2>4.3 Trunk-Based Development (TBD)</h2>
+  <p>
+    The standard in high-performing engineering organizations (Google, Netflix, Meta). Developers merge small, frequent commits into the single shared branch (<code>trunk</code> / <code>main</code>) multiple times per day.
+  </p>
+  <ul>
+    <li><strong>Feature Flags (Toggles):</strong> Incomplete features are safely hidden behind runtime conditionals rather than kept in long-lived isolated branches.</li>
+    <li><strong>Elimination of Merge Debt:</strong> Minimizes code drift, shortens feedback loops, and enables genuine Continuous Integration.</li>
+  </ul>
+
+  <!-- SECTION 5 -->
+  <div class="page-break"></div>
+  <h1>5. Merging in Version Control</h1>
+  <p>
+    Merging is the mathematical and operational procedure of reconciling divergent commit histories into a unified line of development.
+  </p>
+
+  <h2>5.1 Types of Merges</h2>
+  <ul>
+    <li>
+      <strong>Fast-Forward Merge:</strong> Occurs when the target branch has no intermediate commits since the feature branch diverged. Git simply advances the target branch pointer forward to the tip of the incoming branch without generating a new commit node.
+    </li>
+    <li>
+      <strong>3-Way Merge (ORT / Recursive):</strong> Occurs when both target and feature branches have independently advanced. Git computes a common ancestor (the Merge Base), compares both tips against the ancestor, and produces a dedicated <strong>Merge Commit</strong> with two parent pointers.
+    </li>
+    <li>
+      <strong>Squash and Merge:</strong> Compresses all commits from a feature branch into a single clean commit on the target branch, keeping trunk history linear and uncluttered.
+    </li>
+    <li>
+      <strong>Rebase (<code>git rebase</code>):</strong> Re-applies feature branch commits sequentially on top of the latest tip of the target branch, rewriting commit hashes to achieve a pristine linear history.
+    </li>
+  </ul>
+
+  <h2>5.2 Merge Conflict Resolution Workflow</h2>
+  <p>
+    A conflict arises when two branches modify the identical lines of a file in conflicting ways, or when one branch deletes a file that another modifies. Git pauses execution, introduces conflict markers, and yields control to the engineer:
+  </p>
+
+  <pre><code><<<<<<< HEAD
+const TAX_RATE = 0.0825; // California updated rate from main
+=======
+const TAX_RATE = 0.0800; // Legacy rate from feature branch
+>>>>>>> feature/tax-rules</code></pre>
+
+  <p><strong>Systematic Resolution Process:</strong></p>
+  <ol>
+    <li>Identify conflicted files using <code>git status</code>.</li>
+    <li>Open each file in an IDE with 3-way merge tools (e.g., VS Code or IntelliJ).</li>
+    <li>Select the intended incoming or current changes, or write a synthesized reconciliation, removing all marker delimiters (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>).</li>
+    <li>Execute test suites locally to ensure semantic correctness (e.g., <code>npm test</code>).</li>
+    <li>Stage the resolved files with <code>git add &lt;file&gt;</code> and finalize with <code>git commit</code>.</li>
+  </ol>
+
+  <!-- SECTION 6 -->
+  <h1>6. Using Version Control Interfaces</h1>
+  <p>
+    Modern engineers interact with Git through three synergistic interface layers:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 25%;">Interface Layer</th>
+        <th style="width: 35%;">Representative Tools</th>
+        <th style="width: 40%;">Primary Advantages & Use Cases</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Command Line Interface (CLI)</strong></td>
+        <td><code>git</code> in Terminal, Bash, PowerShell, Zsh</td>
+        <td>Universal availability, raw speed, full access to advanced operations (<code>reflog</code>, <code>bisect</code>, interactive rebase), scriptable in CI/CD automation.</td>
+      </tr>
+      <tr>
+        <td><strong>Graphical User Interfaces (GUI) & IDEs</strong></td>
+        <td>GitKraken, SourceTree, VS Code GitLens, JetBrains VCS</td>
+        <td>Visualizing complex branch trees, visual diffing, interactive staging of individual line hunks, intuitive visual conflict resolution.</td>
+      </tr>
+      <tr>
+        <td><strong>Web Hosting Platforms</strong></td>
+        <td>GitHub, GitLab, Bitbucket, Gitea</td>
+        <td>Asynchronous team collaboration, Pull/Merge Request code reviews, automated CI/CD triggering, access governance, release packaging, issue tracking.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 7 -->
+  <div class="page-break"></div>
+  <h1>7. Types of Software Testing</h1>
+  <p>
+    Software testing is the systematic empirical investigation of software components to verify functional conformity, operational resilience, and non-functional performance against engineering specifications.
+  </p>
+
+  <div class="flowchart">
+                     ▲
+                    / \             [Manual / E2E Testing]
+                   /   \            - Slowest, most brittle, highest operational cost
+                  / E2E \           - Real browser automation (Cypress, Playwright)
+                 /-------\
+                /         \         [Integration Testing]
+               /Integration\        - Validates inter-service contracts, database queries, APIs
+              /-------------\
+             /                 \    [Unit Testing]
+            /    Unit Tests     \   - Highest volume, milliseconds execution, isolated functions
+           /---------------------\  - Pure logic verification (Jest, Mocha, Pytest)
+  </div>
+
+  <h2>7.1 The Testing Taxonomy</h2>
+  <ul>
+    <li>
+      <strong>Unit Testing:</strong> Examines individual functions, algorithms, or classes in complete isolation from external resources (databases, network I/O). Uses test doubles (mocks, stubs) to guarantee lightning-fast execution and deterministic results.
+    </li>
+    <li>
+      <strong>Integration Testing:</strong> Verifies that multiple software modules interact harmoniously. Tests database adapters, API client layers, message queues, and caching infrastructure.
+    </li>
+    <li>
+      <strong>End-to-End (E2E) Testing:</strong> Simulates genuine user journeys through the compiled application, driving real web browsers, native UI components, and live backend services.
+    </li>
+    <li>
+      <strong>Regression Testing:</strong> Re-executing existing test suites against newly modified code to confirm that defect fixes or newly introduced features have not broken pre-existing functionality.
+    </li>
+    <li>
+      <strong>Smoke & Sanity Testing:</strong> Rapid initial verification runs executed immediately post-deployment to validate that core server routes and critical paths respond normally (HTTP 200 OK).
+    </li>
+    <li>
+      <strong>Non-Functional Testing:</strong> Encompasses performance testing (k6, Locust), security vulnerability scanning (SAST/DAST), stress testing, and accessibility auditing (WCAG).
+    </li>
+  </ul>
+
+  <!-- SECTION 8 -->
+  <h1>8. Importance & Value of Automated Testing</h1>
+  <p>
+    Manual testing cannot scale in continuous delivery environments. Automated testing serves as the bedrock of modern agile engineering:
+  </p>
+  <ul>
+    <li>
+      <strong>Shift-Left Defect Cost Curve:</strong> According to the National Institute of Standards and Technology (NIST), catching a defect during unit testing is <strong>up to 30x cheaper</strong> than rectifying the same defect after it reaches production environments.
+    </li>
+    <li>
+      <strong>Psychological Safety & Refactoring Velocity:</strong> Engineers can refactor aging codebases, optimize performance, and upgrade third-party dependencies confidently knowing that comprehensive test suites will instantly catch unintended side effects.
+    </li>
+    <li>
+      <strong>Executable Living Documentation:</strong> Unlike stale Confluence pages, well-crafted unit test suites act as authoritative, living specifications demonstrating exactly how each API is intended to be invoked.
+    </li>
+    <li>
+      <strong>Deterministic Quality Gate for CI/CD:</strong> Removes human subjectivity from the release process; pull requests cannot merge unless 100% of automated tests pass.
+    </li>
+  </ul>
+
+  <!-- SECTION 9 -->
+  <div class="page-break"></div>
+  <h1>9. Implementing Tests in Code: Patterns & Best Practices</h1>
+  <p>
+    Writing maintainable, resilient tests requires adhering to established engineering patterns.
+  </p>
+
+  <h2>9.1 The Arrange-Act-Assert (AAA) Pattern</h2>
+  <p>
+    The standard structure for readable and isolated unit test cases:
+  </p>
+  <ol>
+    <li><strong>Arrange:</strong> Instantiate target objects, initialize mock parameters, and configure the test environment state.</li>
+    <li><strong>Act:</strong> Execute the specific method, function, or API endpoint under test.</li>
+    <li><strong>Assert:</strong> Inspect the resulting output, state mutations, or exceptions against strict expected outcomes.</li>
+  </ol>
+
+  <pre><code>// Example Unit Test demonstrating the AAA Pattern in Jest
+test('should compute total with 25% discount and sales tax', () => {
+  // 1. ARRANGE
+  const order = new Order('ORD-101', 'user@example.com');
+  order.addItem({ sku: 'HEADPHONES', price: 100, quantity: 2 }); // Subtotal = $200
+  const orderService = new OrderService();
+
+  // 2. ACT
+  const summary = orderService.calculateOrderSummary(order, {
+    couponCode: 'SAVE25', // 25% off = $50 discount -> $150
+    regionCode: 'US_CA'   // 8.25% CA Tax -> $12.38
+  });
+
+  // 3. ASSERT
+  expect(summary.subtotal).toBe(200.00);
+  expect(summary.discounts.couponDiscount).toBe(50.00);
+  expect(summary.discountedSubtotal).toBe(150.00);
+  expect(summary.tax).toBe(12.38);
+});</code></pre>
+
+  <h2>9.2 Test Doubles: Mocks, Stubs, and Spies</h2>
+  <p>
+    When code under test interacts with unpredictable external dependencies (payment gateways, disk systems, third-party SMS providers), test doubles isolate the unit:
+  </p>
+  <ul>
+    <li><strong>Stubs:</strong> Provide canned, pre-recorded responses to method calls without logic.</li>
+    <li><strong>Mocks:</strong> Pre-programmed objects configured with expectations regarding which methods must be invoked, in what order, and with what arguments.</li>
+    <li><strong>Spies:</strong> Wrap real methods to observe and record execution telemetry (call counts, passed arguments, return values) without modifying core behavior (e.g., <code>jest.spyOn()</code>).</li>
+  </ul>
+
+  <!-- SECTION 10 -->
+  <h1>10. Continuous Deployment Overview</h1>
+  <p>
+    Continuous software release practices represent a maturity spectrum:
+  </p>
+
+  <div class="flowchart">
+[Continuous Integration (CI)]
+Code Commit ---> Automated Lint & Build ---> Automated Unit & Integration Tests ---> Verified Artifact
+
+[Continuous Delivery (CD)]
+CI Output ---> Automated Staging Deployment ---> Automated Smoke Tests ---> [Manual Approval Gate] ---> Production
+
+[Continuous Deployment (CD)]
+CI Output ---> Automated Staging Deployment ---> Automated Verification ---> [Automated Zero-Touch Deploy to Prod]
+  </div>
+
+  <h2>10.1 Advanced Release & Deployment Strategies</h2>
+  <ul>
+    <li>
+      <strong>Blue-Green Deployment:</strong> Two identical production environments exist simultaneously. "Green" hosts the active live traffic, while the new release is deployed to "Blue". After automated smoke tests pass on Blue, router/load balancer traffic instantly switches from Green to Blue with zero customer interruption.
+    </li>
+    <li>
+      <strong>Canary Deployment:</strong> The new release is exposed to a small, controlled canary cohort (e.g., 5% of incoming user traffic). Error rates and latency metrics are monitored automatically. If anomalies occur, traffic rolls back instantly; if healthy, traffic scales to 100%.
+    </li>
+    <li>
+      <strong>Rolling Update:</strong> Instances within a Kubernetes cluster or server pool are incrementally replaced one by one with newer containers, maintaining cluster capacity throughout the release.
+    </li>
+  </ul>
+
+  <!-- SECTION 11 -->
+  <div class="page-break"></div>
+  <h1>11. Deployment Pipelines Explained</h1>
+  <p>
+    A modern deployment pipeline is an automated, repeatable sequence of validation gates through which source code must pass before reaching production infrastructure.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 15%;">Stage</th>
+        <th style="width: 25%;">Trigger & Input</th>
+        <th style="width: 35%;">Action Performed</th>
+        <th style="width: 25%;">Failure Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Source Trigger</strong></td>
+        <td>Git Push / PR Creation</td>
+        <td>Webhooks notify CI runner; pristine environment container spawned.</td>
+        <td>Pipeline does not launch.</td>
+      </tr>
+      <tr>
+        <td><strong>2. Static Analysis</strong></td>
+        <td>Source code</td>
+        <td>Static linting (ESLint), code formatting check (Prettier), type checking (TypeScript).</td>
+        <td>Immediate PR block; notifications sent to committer.</td>
+      </tr>
+      <tr>
+        <td><strong>3. Automated Tests</strong></td>
+        <td>Linted codebase</td>
+        <td>Executes Unit and Integration test matrices across Node/OS runtime versions. Code coverage calculated.</td>
+        <td>Build fails; merge forbidden until tests are patched.</td>
+      </tr>
+      <tr>
+        <td><strong>4. Security & Audit</strong></td>
+        <td>Dependencies & Dockerfile</td>
+        <td>SAST scans, dependency vulnerability checks (<code>npm audit</code>, Snyk, Trivy container scan).</td>
+        <td>Build halted if Critical/High CVEs discovered.</td>
+      </tr>
+      <tr>
+        <td><strong>5. Artifact Build</strong></td>
+        <td>Verified code</td>
+        <td>Compiles bundles (Webpack/Vite), builds version-tagged OCI Docker images, pushes to registry.</td>
+        <td>Registry upload failed; alert sent.</td>
+      </tr>
+      <tr>
+        <td><strong>6. Staging Deploy</strong></td>
+        <td>Docker image artifact</td>
+        <td>Deploy to staging cluster; run automated integration & E2E smoke tests.</td>
+        <td>Staging rollout aborted; developer notified.</td>
+      </tr>
+      <tr>
+        <td><strong>7. Prod Deployment</strong></td>
+        <td>Verified staging release</td>
+        <td>Zero-downtime blue-green or canary release onto production cloud infrastructure.</td>
+        <td>Automated instant rollback to previous healthy release tag.</td>
+      </tr>
+      <tr>
+        <td><strong>8. Observability</strong></td>
+        <td>Live production telemetry</td>
+        <td>APM monitoring (Datadog, Prometheus), real-time error tracking (Sentry), automated alerts.</td>
+        <td>Automated circuit breaker or on-call engineer paging.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 12 -->
+  <h1>12. CI/CD in Practice: GitHub Actions</h1>
+  <p>
+    <strong>GitHub Actions</strong> is a cloud-native continuous integration and delivery platform deeply integrated into GitHub. Workflows are declared as declarative YAML manifests residing in the <code>.github/workflows/</code> directory of the codebase.
+  </p>
+
+  <h2>12.1 Core Architectural Primitives</h2>
+  <ul>
+    <li><strong>Workflow:</strong> An automated procedure composed of one or more jobs, triggered by repository events (<code>push</code>, <code>pull_request</code>, <code>schedule</code>).</li>
+    <li><strong>Jobs:</strong> A set of sequential steps executed on the same virtual runner instance (e.g., <code>ubuntu-latest</code>). Jobs run concurrently unless explicit <code>needs:</code> dependencies are specified.</li>
+    <li><strong>Steps:</strong> Individual tasks executing either shell commands (<code>run: npm test</code>) or pre-built reusable actions from the GitHub Marketplace (<code>uses: actions/checkout@v4</code>).</li>
+    <li><strong>Matrix Strategy:</strong> Enables testing across multi-dimensional combinations of operating systems and runtime versions (e.g., Node.js 18.x, 20.x, 22.x).</li>
+    <li><strong>Secrets Management:</strong> Sensitive credentials (API tokens, SSH private keys, cloud access keys) are encrypted in GitHub Repository Secrets and injected at runtime via <code>${{ secrets.API_KEY }}</code>.</li>
+  </ul>
+
+  <!-- SECTION 13 -->
+  <div class="page-break"></div>
+  <h1>13. Practical Project Implementation & Test Execution Report</h1>
+  <p>
+    To provide concrete demonstration of the concepts outlined in this report, a fully functional Node.js domain service—an <strong>E-Commerce Order & Discount Management Engine</strong>—was engineered, version-controlled with Git, and verified using an automated <strong>Jest</strong> test suite.
+  </p>
+
+  <h2>13.1 Project Architecture & Module Responsibilities</h2>
+  <ul>
+    <li><code>Order.js</code>: Domain entity encapsulating order lines, quantity mutations, validation rules, and decimal subtotal calculations.</li>
+    <li><code>TaxService.js</code>: Calculates regional jurisdictional sales tax with configurable rates (US_CA, US_TX, EU_DE, EU_FR, UK).</li>
+    <li><code>DiscountService.js</code>: Manages percentage coupons, fixed promotions, minimum spend thresholds, and bulk volume discount logic.</li>
+    <li><code>PaymentGateway.js</code>: Simulates third-party asynchronous payment token validation, card decline handling, and refunds.</li>
+    <li><code>OrderService.js</code>: High-level orchestrator executing checkout flows, tax calculations, discounts, payment processing, and receipts.</li>
+  </ul>
+
+  <h2>13.2 Automated Test Suite Structure</h2>
+  <p>
+    The test suite adheres strictly to the AAA pattern and covers edge cases, validation boundaries, and mocked network timeouts:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Test Suite</th>
+        <th>File Path</th>
+        <th>Tests</th>
+        <th>Scope & Validations Covered</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Order Model Tests</strong></td>
+        <td><code>tests/unit/Order.test.js</code></td>
+        <td>8</td>
+        <td>Constructor validations, invalid ID/email exceptions, duplicate SKU incrementing, item deletion, subtotal calculations.</td>
+      </tr>
+      <tr>
+        <td><strong>Tax Service Tests</strong></td>
+        <td><code>tests/unit/TaxService.test.js</code></td>
+        <td>5</td>
+        <td>Standard regional tax lookups, custom constructor rates, fallback to default, negative/invalid amount exceptions.</td>
+      </tr>
+      <tr>
+        <td><strong>Discount Service Tests</strong></td>
+        <td><code>tests/unit/DiscountService.test.js</code></td>
+        <td>11</td>
+        <td>Percentage discounts (10%, 25%), fixed discounts, minimum spend violations, loyalty tier multipliers (Silver/Gold/Platinum), bulk quantity rules, edge case validations.</td>
+      </tr>
+      <tr>
+        <td><strong>Payment Gateway Tests</strong></td>
+        <td><code>tests/unit/PaymentGateway.test.js</code></td>
+        <td>6</td>
+        <td>Successful async credit card transactions, declined card ending in 0000, input validation errors, refund transaction tracking, missing parameter handling.</td>
+      </tr>
+      <tr>
+        <td><strong>Order Service Integration</strong></td>
+        <td><code>tests/integration/OrderService.test.js</code></td>
+        <td>8</td>
+        <td>End-to-end checkout, free shipping qualification over $150, card decline error propagation, <code>jest.spyOn()</code> mock gateway failures, empty/null order error validation.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>13.3 Test Execution Results</h2>
+  <pre><code>PASS tests/unit/Order.test.js
+PASS tests/unit/TaxService.test.js
+PASS tests/unit/DiscountService.test.js
+PASS tests/unit/PaymentGateway.test.js
+PASS tests/integration/OrderService.test.js
+
+Test Suites: 5 passed, 5 total
+Tests:       38 passed, 38 total
+Snapshots:   0 total
+Time:        0.985 s
+Ran all test suites.
+
+---------------------|---------|----------|---------|---------|-------------------
+File                 | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------|---------|----------|---------|---------|-------------------
+All files            |     100 |    96.87 |     100 |     100 |                   
+ models              |     100 |      100 |     100 |     100 |                   
+  Order.js           |     100 |      100 |     100 |     100 |                   
+ services            |     100 |    95.94 |     100 |     100 |                   
+  DiscountService.js |     100 |    96.29 |     100 |     100 | 45                
+  OrderService.js    |     100 |    94.44 |     100 |     100 | 58                
+  PaymentGateway.js  |     100 |    94.44 |     100 |     100 | 23                
+  TaxService.js      |     100 |      100 |     100 |     100 |                   
+---------------------|---------|----------|---------|---------|-------------------</code></pre>
+
+  <div class="callout tip">
+    <div class="callout-title">✅ Verification Outcome</div>
+    All <strong>38 test cases passed</strong> with 100% statement and 100% line coverage. The project exhibits robust test isolation, deterministic behavior, and resilience against regression.
+  </div>
+
+  <h2>13.4 Git Version Control & Branching Tree</h2>
+  <p>
+    The repository demonstrates genuine branch management, feature isolation, and non-fast-forward merge integration:
+  </p>
+  <div class="flowchart">
+*   ed5ee00 (HEAD -> main) Merge branch 'feature/loyalty-tier-discounts' into main
+|\  
+| * 22cc94f (feature/loyalty-tier-discounts) feat(discount): add customer loyalty tier discounts and automated tests
+|/  
+* 6b7ac87 feat: initial commit with Jest test suite, CI/CD pipeline, and assignment report
+  </div>
+
+  <h2>13.5 GitHub Repository Link</h2>
+  <ul>
+    <li><strong>Author:</strong> Animesh Devarkar (<code>animeshDevarkar</code>)</li>
+    <li><strong>GitHub Repository URL:</strong> <a href="https://github.com/animeshDevarkar/version-control-testing-deployment">https://github.com/animeshDevarkar/version-control-testing-deployment</a></li>
+    <li><strong>Branching Configuration:</strong> <code>main</code> branch with automated matrix testing (Node 18.x, 20.x, 22.x) and environment deployment hooks.</li>
+  </ul>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDquest Real-Time Chat App</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- AUTH MODAL -->
+  <div id="authModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="brand-badge">⚡ Real-Time Chat</div>
+        <h2>Welcome to ChatHub</h2>
+        <p>Built with Node.js, Express, MongoDB & Socket.io</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button id="tabLogin" class="tab-btn active" type="button">Sign In</button>
+        <button id="tabRegister" class="tab-btn" type="button">Register</button>
+      </div>
+
+      <div id="authError" class="auth-error hidden"></div>
+
+      <!-- Sign In Form -->
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="loginUsername">Username</label>
+          <input type="text" id="loginUsername" placeholder="e.g. alex_dev" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn btn-primary full-width">Sign In</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" class="auth-form hidden">
+        <div class="form-group">
+          <label for="regUsername">Choose Username</label>
+          <input type="text" id="regUsername" placeholder="e.g. alex_dev" required minlength="3" maxlength="30" />
+        </div>
+        <div class="form-group">
+          <label for="regPassword">Password (min. 6 characters)</label>
+          <input type="password" id="regPassword" placeholder="••••••••" required minlength="6" />
+        </div>
+        <button type="submit" class="btn btn-primary full-width">Create Account</button>
+      </form>
+
+      <div class="auth-footer">
+        <button id="btnGuest" type="button" class="btn btn-ghost full-width">Continue as Guest</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CHAT APP SHELL -->
+  <div class="app-container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="app-brand">
+          <div class="logo-icon">💬</div>
+          <div class="logo-text">
+            <h3>DevChat</h3>
+            <span class="badge">Real-Time</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current User Profile Widget -->
+      <div class="current-user-card">
+        <div class="avatar" id="myAvatar">U</div>
+        <div class="user-info">
+          <span class="user-name" id="myUsername">Loading...</span>
+          <span class="user-status"><span class="status-dot"></span> Online</span>
+        </div>
+        <button id="btnLogout" class="btn-icon" title="Logout">🚪</button>
+      </div>
+
+      <!-- Channel Rooms -->
+      <div class="sidebar-section">
+        <span class="section-title">CHANNELS</span>
+        <ul class="room-list" id="roomList">
+          <li class="room-item active" data-room="general">
+            <span class="room-icon">💬</span>
+            <span class="room-name">general</span>
+          </li>
+          <li class="room-item" data-room="tech">
+            <span class="room-icon">💻</span>
+            <span class="room-name">tech</span>
+          </li>
+          <li class="room-item" data-room="random">
+            <span class="room-icon">🎲</span>
+            <span class="room-name">random</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Active Users in Room -->
+      <div class="sidebar-section users-section">
+        <span class="section-title">ONLINE IN THIS ROOM (<span id="userCount">0</span>)</span>
+        <ul class="user-list" id="roomUsersList">
+          <!-- Populated dynamically via Socket.io -->
+        </ul>
+      </div>
+    </aside>
+
+    <!-- CHAT WORKSPACE -->
+    <main class="chat-main">
+      <!-- Chat Header -->
+      <header class="chat-header">
+        <div class="room-info">
+          <h2 id="activeRoomTitle">#general</h2>
+          <p id="activeRoomDesc">General community chatter</p>
+        </div>
+        <div class="connection-status">
+          <span class="status-pill connected" id="connectionPill">Connected</span>
+        </div>
+      </header>
+
+      <!-- Message History Container -->
+      <div class="chat-messages" id="chatMessages">
+        <!-- Messages rendered dynamically -->
+      </div>
+
+      <!-- Typing indicator banner -->
+      <div class="typing-indicator-bar" id="typingIndicator"></div>
+
+      <!-- Message Input Form -->
+      <footer class="chat-footer">
+        <form id="messageForm" class="message-form">
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="Type a message in #general..."
+            autocomplete="off"
+            maxlength="1000"
+            required
+          />
+          <button type="submit" class="btn btn-send" id="sendBtn">
+            <span>Send</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </footer>
+    </main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+</html>

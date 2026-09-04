@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Order & Automated Testing Dashboard</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      color: white;
+      padding: 32px;
+      border-radius: 12px;
+      margin-bottom: 28px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      color: #bfdbfe;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #cbd5e1;
+      font-size: 1rem;
+    }
+
+    .metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    .metric-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .metric-value {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 4px;
+    }
+
+    .metric-subtitle {
+      font-size: 0.8rem;
+      color: var(--success);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .product-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .product-info h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .product-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-outline {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+    }
+
+    .btn-danger {
+      background: #fee2e2;
+      color: var(--danger);
+      padding: 4px 8px;
+      font-size: 0.75rem;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.9rem;
+      background: white;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .cart-summary {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+
+    .summary-row.total {
+      border-top: 2px solid var(--border);
+      padding-top: 12px;
+      margin-top: 12px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .alert {
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 16px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .alert-success {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .alert-danger {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .test-badge {
+      display: inline-block;
+      background: #10b981;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="header-badge">Live Interactive Application</span>
+      <h1>E-Commerce Order & Testing Platform</h1>
+      <p>Version Control, Automated Testing (Jest), and Continuous Deployment in Practice</p>
+    </header>
+
+    <!-- Top Metrics -->
+    <div class="metrics-bar">
+      <div class="metric-card">
+        <div class="metric-title">Automated Tests</div>
+        <div class="metric-value">38 / 38</div>
+        <div class="metric-subtitle">✅ 100% Tests Passing</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Code Coverage</div>
+        <div class="metric-value">100%</div>
+        <div class="metric-subtitle">🎯 100% Stmts & Lines</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">CI/CD Pipeline</div>
+        <div class="metric-value">GitHub Actions</div>
+        <div class="metric-subtitle">Node 18.x, 20.x, 22.x</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">Branching Model</div>
+        <div class="metric-value">GitFlow / PR</div>
+        <div class="metric-subtitle">Feature Merged via ORT</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Product Catalog & Cart Controls -->
+      <div class="card">
+        <h2>🛍️ Available Products</h2>
+        <div class="product-list">
+          <div class="product-item">
+            <div class="product-info">
+              <h3>MacBook Pro M3</h3>
+              <p>SKU: LAPTOP-PRO • $1,999.99</p>
+            </div>
+            <button class="btn btn-primary" onclick="addToCart('LAPTOP-PRO', 'MacBook Pro M3', 1999.99)">+ Add</button>
+          </div>
+          <div class="product-item">
+            <div class="product-info">
+              <h3>Thunderbolt 4 Dock</h3>
+              <p>SKU: USB-C-DOCK • $149.50</p>
+            </div>
+            <button class="btn btn-primary" onclick="addToCart('USB-C-DOCK', 'Thunderbolt 4 Dock', 149.50)">+ Add</button>
+          </div>
+          <div class="product-item">
+            <div class="product-info">
+              <h3>Mechanical Keyboard</h3>
+              <p>SKU: MECH-KEY • $89.00</p>
+            </div>
+            <button class="btn btn-primary" onclick="addToCart('MECH-KEY', 'Mechanical Keyboard', 89.00)">+ Add</button>
+          </div>
+          <div class="product-item">
+            <div class="product-info">
+              <h3>Wireless Gaming Mouse</h3>
+              <p>SKU: MOUSE-PRO • $49.99</p>
+            </div>
+            <button class="btn btn-primary" onclick="addToCart('MOUSE-PRO', 'Wireless Gaming Mouse', 49.99)">+ Add</button>
+          </div>
+        </div>
+
+        <h2 style="margin-top: 24px;">🏷️ Discounts & Region</h2>
+        <div class="form-group">
+          <label for="couponInput">Coupon Code</label>
+          <input type="text" id="couponInput" placeholder="Try SAVE25, SAVE10, FLAT15, or VIP50" value="SAVE25" oninput="updateSummary()">
+        </div>
+
+        <div class="form-group">
+          <label for="loyaltySelect">Loyalty Tier (Feature Branch Added)</label>
+          <select id="loyaltySelect" onchange="updateSummary()">
+            <option value="NONE">Standard (0% discount)</option>
+            <option value="SILVER">Silver (3% extra loyalty)</option>
+            <option value="GOLD" selected>Gold (7% extra loyalty)</option>
+            <option value="PLATINUM">Platinum (12% extra loyalty)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="regionSelect">Sales Tax Region</label>
+          <select id="regionSelect" onchange="updateSummary()">
+            <option value="US_CA" selected>California (8.25%)</option>
+            <option value="US_TX">Texas (6.25%)</option>
+            <option value="US_NY">New York (8.875%)</option>
+            <option value="EU_DE">Germany (19.0%)</option>
+            <option value="UK">United Kingdom (20.0%)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Live Order Summary & Checkout -->
+      <div class="card">
+        <h2>🧾 Current Cart & Checkout</h2>
+        <div id="cartItemsContainer" style="margin-bottom: 16px;">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>Subtotal (<span id="summaryItemCount">0</span> items):</span>
+            <span id="summarySubtotal">$0.00</span>
+          </div>
+          <div class="summary-row" style="color: #166534;">
+            <span>Coupon Discount:</span>
+            <span id="summaryCouponDiscount">-$0.00</span>
+          </div>
+          <div class="summary-row" style="color: #166534;">
+            <span>Loyalty Tier Discount:</span>
+            <span id="summaryLoyaltyDiscount">-$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Estimated Sales Tax:</span>
+            <span id="summaryTax">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping:</span>
+            <span id="summaryShipping">$0.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total:</span>
+            <span id="summaryTotal">$0.00</span>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 20px;">
+          <label for="cardNumber">Card Number (Mock Payment Gateway)</label>
+          <input type="text" id="cardNumber" value="4242424242424242" placeholder="Card number (ends in 0000 to test decline)">
+          <small style="color: var(--text-muted); display: block; margin-top: 4px;">
+            💡 Tip: Use a card ending in <code>0000</code> to test payment decline handling!
+          </small>
+        </div>
+
+        <button class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 1rem;" onclick="processCheckout()">
+          🔒 Complete Order & Checkout
+        </button>
+
+        <div id="alertBox" class="alert"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const cart = [
+      { sku: 'LAPTOP-PRO', name: 'MacBook Pro M3', price: 1999.99, quantity: 1 },
+      { sku: 'USB-C-DOCK', name: 'Thunderbolt 4 Dock', price: 149.50, quantity: 1 }
+    ];
+
+    const TAX_RATES = {
+      US_CA: 0.0825,
+      US_TX: 0.0625,
+      US_NY: 0.08875,
+      EU_DE: 0.19,
+      UK: 0.20
+    };
+
+    const COUPONS = {
+      SAVE10: { type: 'PERCENT', value: 10, min: 20 },
+      SAVE25: { type: 'PERCENT', value: 25, min: 100 },
+      FLAT15: { type: 'FIXED', value: 15, min: 50 },
+      VIP50: { type: 'FIXED', value: 50, min: 200 }
+    };
+
+    const LOYALTY_RATES = {
+      SILVER: 0.03,
+      GOLD: 0.07,
+      PLATINUM: 0.12,
+      NONE: 0
+    };
+
+    function renderCart() {
+      const container = document.getElementById('cartItemsContainer');
+      if (cart.length === 0) {
+        container.innerHTML = '<p style="color: #64748b; font-style: italic;">Your cart is empty. Add products from the catalog.</p>';
+        return;
+      }
+
+      container.innerHTML = cart.map(item => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed #e2e8f0;">
+          <div>
+            <strong>${item.name}</strong> (${item.quantity}x)
+            <div style="font-size: 0.8rem; color: #64748b;">$${item.price.toFixed(2)} each</div>
+          </div>
+          <div>
+            <span style="font-weight: 600; margin-right: 12px;">$${(item.price * item.quantity).toFixed(2)}</span>
+            <button class="btn btn-danger" onclick="removeFromCart('${item.sku}')">Remove</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addToCart(sku, name, price) {
+      const existing = cart.find(i => i.sku === sku);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ sku, name, price, quantity: 1 });
+      }
+      renderCart();
+      updateSummary();
+    }
+
+    function removeFromCart(sku) {
+      const idx = cart.findIndex(i => i.sku === sku);
+      if (idx !== -1) {
+        cart.splice(idx, 1);
+      }
+      renderCart();
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+      const couponCode = (document.getElementById('couponInput').value || '').toUpperCase().trim();
+      let couponDiscount = 0;
+      if (COUPONS[couponCode]) {
+        const c = COUPONS[couponCode];
+        if (subtotal >= c.min) {
+          couponDiscount = c.type === 'PERCENT' ? (subtotal * c.value) / 100 : c.value;
+        }
+      }
+
+      const loyaltyTier = document.getElementById('loyaltySelect').value;
+      const loyaltyRate = LOYALTY_RATES[loyaltyTier] || 0;
+      const loyaltyDiscount = subtotal * loyaltyRate;
+
+      const totalDiscount = Math.min(subtotal, couponDiscount + loyaltyDiscount);
+      const discountedSubtotal = Math.max(0, subtotal - totalDiscount);
+
+      const region = document.getElementById('regionSelect').value;
+      const taxRate = TAX_RATES[region] || 0.05;
+      const tax = discountedSubtotal * taxRate;
+
+      const shipping = subtotal === 0 ? 0 : (discountedSubtotal > 150 ? 0 : 9.99);
+      const total = discountedSubtotal + tax + shipping;
+
+      document.getElementById('summaryItemCount').innerText = itemCount;
+      document.getElementById('summarySubtotal').innerText = `$${subtotal.toFixed(2)}`;
+      document.getElementById('summaryCouponDiscount').innerText = `-$${couponDiscount.toFixed(2)}`;
+      document.getElementById('summaryLoyaltyDiscount').innerText = `-$${loyaltyDiscount.toFixed(2)}`;
+      document.getElementById('summaryTax').innerText = `$${tax.toFixed(2)} (${(taxRate * 100).toFixed(2)}%)`;
+      document.getElementById('summaryShipping').innerText = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
+      document.getElementById('summaryTotal').innerText = `$${total.toFixed(2)}`;
+    }
+
+    function processCheckout() {
+      const alertBox = document.getElementById('alertBox');
+      if (cart.length === 0) {
+        alertBox.className = 'alert alert-danger';
+        alertBox.innerText = 'Cannot checkout with an empty cart!';
+        alertBox.style.display = 'block';
+        return;
+      }
+
+      const cardNumber = document.getElementById('cardNumber').value.trim();
+      if (!cardNumber) {
+        alertBox.className = 'alert alert-danger';
+        alertBox.innerText = 'Please provide a valid card number.';
+        alertBox.style.display = 'block';
+        return;
+      }
+
+      if (cardNumber.endsWith('0000')) {
+        alertBox.className = 'alert alert-danger';
+        alertBox.innerText = '❌ Payment Gateway Error: Card declined (Simulated decline for card ending in 0000). Status: PAYMENT_FAILED';
+        alertBox.style.display = 'block';
+        return;
+      }
+
+      const txnId = 'txn_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+      const total = document.getElementById('summaryTotal').innerText;
+
+      alertBox.className = 'alert alert-success';
+      alertBox.innerHTML = `
+        <strong>🎉 Checkout Successful!</strong><br>
+        Transaction ID: <code>${txnId}</code><br>
+        Charged Amount: <strong>${total}</strong><br>
+        Status: <span class="test-badge">COMPLETED</span> • Receipt dispatched to customer email.
+      `;
+      alertBox.style.display = 'block';
+    }
+
+    // Initial render
+    renderCart();
+    updateSummary();
+  </script>
+</body>
+</html>
