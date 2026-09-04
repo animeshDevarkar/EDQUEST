@@ -17,6 +17,7 @@ Welcome to the central repository for **EDquest** development assignments and pr
 | **7** | [Frontend Development Assignment](./Frontend%20Development%20Assignment/) | HTML5, CSS Flexbox/Grid, Vanilla JS ES6+, Responsive UI | Completed | [README](./Frontend%20Development%20Assignment/README.md) |
 | **8** | [Performance Optimization Assignment](./Performance%20Optimization%20Assignment/) | React 19, Vite, Vitest, React Profiler, Memoization, Virtualization | Completed | [README](./Performance%20Optimization%20Assignment/README.md) \| [Case Study](./Performance%20Optimization%20Assignment/CASE_STUDY_REPORT.md) |
 | **9** | [React App Project](./React%20App%20Project/) | React 19, Vite, Vitest, Component Props & Data Flow, Modern CSS | Completed | [README](./React%20App%20Project/README.md) |
+| **10** | [Working with API in React JS](./Working%20with%20API%20in%20React%20JS/) | React 19, Vite, Open-Meteo REST & Geocoding APIs, Lucide Icons | Completed | [README](./Working%20with%20API%20in%20React%20JS/README.md) |
 
 ---
 
