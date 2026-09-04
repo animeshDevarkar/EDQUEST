@@ -15,6 +15,7 @@ Welcome to the central repository for **EDquest** development assignments and pr
 | **5** | [MongoDB Fundamentals Assignment](./MongoDB%20Fundamentals%20Assignment/) | Node.js, MongoDB, Mongoose, Express, BSON, Aggregations | Completed | [README](./MongoDB%20Fundamentals%20Assignment/README.md) \| [Research Report](./MongoDB%20Fundamentals%20Assignment/REPORT.md) |
 | **6** | [Express.js Complete Assignment](./Express.js%20Complete%20Assignment/) | Express.js, Node.js, Helmet, Rate-Limit, Compression | Completed | [README](./Express.js%20Complete%20Assignment/README.md) \| [Guide](./Express.js%20Complete%20Assignment/EXPRESS_JS_COMPLETE_GUIDE.md) |
 | **7** | [Frontend Development Assignment](./Frontend%20Development%20Assignment/) | HTML5, CSS Flexbox/Grid, Vanilla JS ES6+, Responsive UI | Completed | [README](./Frontend%20Development%20Assignment/README.md) |
+| **8** | [Performance Optimization Assignment](./Performance%20Optimization%20Assignment/) | React 19, Vite, Vitest, React Profiler, Memoization, Virtualization | Completed | [README](./Performance%20Optimization%20Assignment/README.md) \| [Case Study](./Performance%20Optimization%20Assignment/CASE_STUDY_REPORT.md) |
 
 ---
 
@@ -52,6 +53,12 @@ EDQUEST/
 │   └── DOCUMENTATION.md     # In-depth architectural report
 ├── Version Control, Testing & Deployment Assignment/
 │   └── ...                  # Testing, branching, and CI/CD assignment
+├── Performance Optimization Assignment/
+│   ├── src/                 # React components, hooks, profiler & benchmark engine
+│   ├── test/                # Automated Vitest performance test suite
+│   ├── CASE_STUDY_REPORT.md # Empirical performance report & telemetry analysis
+│   ├── package.json         # Dependencies & scripts
+│   └── README.md            # Masterclass documentation & setup guide
 ├── mongoose-assignment/
 │   └── ...                  # Schema modeling, queries, and research
 ├── .gitignore               # Global ignore rules for node_modules, envs
