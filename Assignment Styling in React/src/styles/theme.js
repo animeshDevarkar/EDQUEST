@@ -1,0 +1,33 @@
+export const lightTheme = {
+  mode: 'light',
+  bg: '#f8fafc',
+  cardBg: '#ffffff',
+  text: '#0f172a',
+  textSecondary: '#475569',
+  border: '#e2e8f0',
+  primary: '#4f46e5',
+  primaryHover: '#4338ca',
+  primaryLight: '#eef2ff',
+  secondary: '#06b6d4',
+  accent: '#f59e0b',
+  success: '#10b981',
+  shadow: '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
+  heroGradient: 'linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%)',
+};
+
+export const darkTheme = {
+  mode: 'dark',
+  bg: '#0f172a',
+  cardBg: '#1e293b',
+  text: '#f8fafc',
+  textSecondary: '#94a3b8',
+  border: '#334155',
+  primary: '#818cf8',
+  primaryHover: '#6366f1',
+  primaryLight: '#1e1b4b',
+  secondary: '#22d3ee',
+  accent: '#fbbf24',
+  success: '#34d399',
+  shadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2)',
+  heroGradient: 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%)',
+};
